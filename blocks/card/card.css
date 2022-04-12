@@ -3,6 +3,7 @@
   border-radius: 10px;
   max-width: 282px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  /* grid-template-columns: 1fr 1fr; */
+  grid-template-columns: max-content 42px;
   grid-template-rows: 1fr 80px;
 }

@@ -14,49 +14,48 @@
     <header class="header">
       <img class="header__logo" src="./images/logo.svg" alt="логотип в шапке">
       <hr class="header__border">
-      <!-- <div class="header__border"></div> -->
     </header>
 
     <section class="profile">
       <img class="profile__image" src="./images/jak-iv-kusto.jpg" alt="изображение профиля">
       <div class="profile__info">
-        <p class="profile__name">Жак-Ив КустоЖак-Ив КустоЖак-Ив Кусто</p>
-        <button class="profile__edit-button"></button>
-        <p class="profile__job">Исследователь океанаЖак-Ив КустоЖак-Ив Кусто</p>
+        <h1 class="profile__name">Жак-Ив Кусто</h1>
+        <button class="profile__edit-button" type="button"></button>
+        <h2 class="profile__job">Исследователь океана</h2>
       </div>
-      <button class="profile__add-button"></button>
+      <button class="profile__add-button" type="button"></button>
     </section>
 
     <section class="elements">
       <div class="card">
         <img class="card__img" src="./images/karachaevsk.jpg" alt="карачаевск">
         <p class="card__name">Карачаевск</p>
-        <button class="card__button"></button>
+        <button class="card__button" type="button"></button>
+      </div>
+      <div class="card">
+        <img class="card__img" src="./images/elbrus.jpg" alt="карачаевск">
+        <p class="card__name">Гора Эльбрус</p>
+        <button class="card__button" type="button"></button>
+      </div>
+      <div class="card">
+        <img class="card__img" src="./images/dombai.jpg" alt="карачаевск">
+        <p class="card__name">Домбай</p>
+        <button class="card__button" type="button"></button>
+      </div>
+      <div class="card">
+        <img class="card__img" src="./images/elbrus.jpg" alt="карачаевск">
+        <p class="card__name">Гора Эльбрус</p>
+        <button class="card__button" type="button"></button>
+      </div>
+      <div class="card">
+        <img class="card__img" src="./images/dombai.jpg" alt="карачаевск">
+        <p class="card__name">Домбай</p>
+        <button class="card__button" type="button"></button>
       </div>
       <div class="card">
         <img class="card__img" src="./images/karachaevsk.jpg" alt="карачаевск">
-        <p class="card__name">Карачаевск</p>
-        <button class="card__button"></button>
-      </div>
-      <div class="card">
-        <img class="card__img" src="./images/karachaevsk.jpg" alt="карачаевск">
-        <p class="card__name">Карачаевск</p>
-        <button class="card__button"></button>
-      </div>
-      <div class="card">
-        <img class="card__img" src="./images/karachaevsk.jpg" alt="карачаевск">
-        <p class="card__name">Карачаевск</p>
-        <button class="card__button"></button>
-      </div>
-      <div class="card">
-        <img class="card__img" src="./images/karachaevsk.jpg" alt="карачаевск">
-        <p class="card__name">Карачаевск</p>
-        <button class="card__button"></button>
-      </div>
-      <div class="card">
-        <img class="card__img" src="./images/karachaevsk.jpg" alt="карачаевск">
-        <p class="card__name">Карачаевск</p>
-        <button class="card__button"></button>
+        <p class="card__name">Карачаево-Черкесия</p>
+        <button class="card__button" type="button"></button>
       </div>
     </section>
 
@@ -64,5 +63,20 @@
       <p class="footer__copyright">© 2022 Mesto Russia</p>
     </footer>
   </div>
+
+  <div class="popup">
+    <div class="popup__content">
+      <button class="popup__close" type="button"></button>
+      <div class="popup__body">
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <input type="text" class="popup__name" value="">
+        <hr class="popup__border">
+        <input type="text" class="popup__job" value="">
+        <hr class="popup__border">
+        <button class="popup__save" type="submit">Сохранить</button>
+      </div>
+    </div>
+  </div>
+  <script src="./scripts/script.js"></script>
 </body>
 </html>
