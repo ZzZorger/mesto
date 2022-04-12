@@ -9,4 +9,18 @@
   padding-top: 16px;
   grid-column-start: 1;
   grid-column-end: 3;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+@media (max-width: 425px) {
+  .profile__job{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+  }
 }

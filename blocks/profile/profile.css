@@ -1,5 +1,16 @@
 .profile{
-  padding: 40px 200px 0px;
+  padding: 40px 15.625% 0;
   display: flex;
-  flex-direction: row;
+  /* display: grid;
+  grid-auto-flow: column; */
+  /* justify-content: space-between; */
+  align-items: center;
+}
+
+@media (max-width: 425px) {
+  .profile{
+    flex-direction: column;
+    padding: 38.25px 19px 0;
+    justify-content: center;
+  }
 }

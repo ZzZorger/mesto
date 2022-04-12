@@ -1,7 +1,22 @@
 .profile__info{
-  padding: 22px 244px 25px 30px;
+  margin-left: 30px;
+  margin-right: 30px;
   display: grid;
-  grid-template-columns: 1fr 24px;
-  /* align-items: center; */
+  /* grid-template-columns: calc(100% - 24px - 18px) 24px; */
+  /* grid-template-columns: 1fr 24px; */
+  grid-template-columns: minmax(100px, max-content) 24px;
   column-gap: 18px;
+  /* max-width: calc(100% - 150px); */
+  /* justify-self: flex-end; */
+  flex-basis: calc(100% - 180px);
+}
+
+@media (max-width: 425px) {
+  .profile__info{
+    column-gap: 10px;
+    padding: 0;
+    padding-top: 26px;
+    /* width: 88.125%; */
+    margin: 0;
+  }
 }

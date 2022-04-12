@@ -1,0 +1,14 @@
+.card__name{
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+  margin: 0;
+  align-self: flex-start;
+  justify-self: flex-start;
+  padding-top: 25px;
+  padding-left: 21px;
+  max-width: 230px;
+  box-sizing: border-box;
+}
