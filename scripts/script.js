@@ -43,21 +43,22 @@ document.querySelector('.popup__job').addEventListener('keydown', function(e) {
   }
 });
 
-//
+
 // Выход из popup при клике вне области контента
-//
-// function cardButtonActiveToggle() {
-//   cardButton.classList.toggle('card__button_active');
-// }
-//
-// cardButton.addEventListener('click', cardButtonActiveToggle);
-// function popupOverlayClickHandler(evt) {
-//   if (evt.target === evt.currentTarget) {
-//     popupOpenToggle();
-//   }
-// }
-// popup.addEventListener('click', popupOverlayClickHandler);
-//
+function popupOverlayClickHandler(evt) {
+  if (evt.target === evt.currentTarget) {
+    popupOpenToggle();
+  }
+}
+popup.addEventListener('click', popupOverlayClickHandler);
+
+
+// Срабатывание кнопки лайк
+function cardButtonActiveToggle() {
+  cardButton.classList.toggle('card__button_active');
+}
+cardButton.addEventListener('click', cardButtonActiveToggle);
+
 
 	
 
