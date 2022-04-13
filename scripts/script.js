@@ -8,7 +8,6 @@ let profileJob = document.querySelector('.profile__job');
 document.querySelector('.popup__name').value = profileName.textContent;
 document.querySelector('.popup__job').value = profileJob.textContent;
 
-
 // Фукнция открытия popup
 function popupOpenToggle() {
   popup.classList.toggle('popup_is-opened');
@@ -32,6 +31,18 @@ popupSaveButton.addEventListener('click', popupSaveButtonToggle);
 popupOpenButton.addEventListener('click', popupOpenToggle);
 popupCloseButton.addEventListener('click', popupOpenToggle);
 
+// Сохранение данных при нажатии клавиши Enter
+document.querySelector('.popup__name').addEventListener('keydown', function(e) {
+  if (e.keyCode === 13) {
+    popupSaveButtonToggle();
+  }
+});
+document.querySelector('.popup__job').addEventListener('keydown', function(e) {
+  if (e.keyCode === 13) {
+    popupSaveButtonToggle();
+  }
+});
+
 //
 // Выход из popup при клике вне области контента
 //
@@ -47,4 +58,6 @@ popupCloseButton.addEventListener('click', popupOpenToggle);
 // }
 // popup.addEventListener('click', popupOverlayClickHandler);
 //
+
+	
 
