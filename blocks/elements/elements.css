@@ -1,4 +1,4 @@
-.elements{
+.elements {
   padding: 50px 15.625% 0;
   display: grid;
   grid-template-columns: repeat(auto-fill, 282px);
@@ -7,7 +7,7 @@
 }
 
 @media (max-width: 425px) {
-  .elements{
+  .elements {
     padding: 36px 5.9375% 0;
     justify-content: center;
   }

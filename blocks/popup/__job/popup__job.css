@@ -1,4 +1,4 @@
-.popup__job{
+.popup__job {
   border: none;
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
   font-style: normal;
@@ -14,7 +14,7 @@
 }
 
 @media (max-width: 425px) {
-  .popup__job{
+  .popup__job {
     margin-top: 30px;
     width: 74.375vw;
   }

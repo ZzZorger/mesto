@@ -1,4 +1,4 @@
-.card__button{
+.card__button {
   width: 22px;
   height: 19px;
   background: url("../../../images/heart.svg") no-repeat center;
@@ -12,6 +12,6 @@
   cursor: pointer;
 }
 
-.card__button:hover{
+.card__button:hover {
   opacity: 0.5;
 }

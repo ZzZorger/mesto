@@ -42,24 +42,3 @@ document.querySelector('.popup__job').addEventListener('keydown', function(e) {
     popupSaveButtonToggle();
   }
 });
-
-
-// Выход из popup при клике вне области контента
-// function popupOverlayClickHandler(evt) {
-//   if (evt.target === evt.currentTarget) {
-//     popupOpenToggle();
-//   }
-// }
-// popup.addEventListener('click', popupOverlayClickHandler);
-
-
-// Срабатывание клавиши лайк
-// function cardButtonActiveToggle() {
-//   cardButton.classList.toggle('card__button_active');
-// }
-
-// cardButton.addEventListener('click', cardButtonActiveToggle);
-
-
-	
-

@@ -1,4 +1,4 @@
-.page{
+.page {
   max-width: 1280px;
   margin: 0 auto;
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
@@ -6,11 +6,4 @@
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   /* padding: 45px 15.625vw 60px; */
-}
-
-
-@media (max-width: 425px) {
-  .page{
-
-  }
 }

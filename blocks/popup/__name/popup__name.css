@@ -1,4 +1,4 @@
-.popup__name{
+.popup__name {
   border: none;
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
   font-style: normal;
@@ -13,12 +13,8 @@
   padding: 0;
 }
 
-/* .popup__name:focus{
-  border: 5px solid #000000;
-} */
-
 @media (max-width: 425px) {
-  .popup__name{
+  .popup__name {
     margin-top: 75px;
     width: 74.375vw;
   }
