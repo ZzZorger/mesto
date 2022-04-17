@@ -1,4 +1,4 @@
-.popup__save{
+.popup__save {
   background: #000000;
   border-radius: 2px;
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
@@ -18,12 +18,12 @@
   padding: 0;
 }
 
-.popup__save:hover{
+.popup__save:hover {
   opacity: 0.8;
 }
 
 @media (max-width: 425px) {
-  .popup__save{
+  .popup__save {
     margin-top: 45px;
     margin-bottom: 25px;
     width: 74.375vw;

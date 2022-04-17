@@ -1,4 +1,4 @@
-.popup__content{
+.popup__content {
   width: 100%;
   max-width: 430px;
   background: white;
@@ -10,7 +10,7 @@
 }
 
 @media (max-width: 425px) {
-  .popup__content{
+  .popup__content {
     max-width: 88.125%;
     padding-left: 6.875%;
     padding-right: 6.875%;
