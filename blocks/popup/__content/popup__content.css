@@ -9,7 +9,7 @@
   box-sizing: border-box;
 }
 
-@media (max-width: 425px) {
+@media (max-width: 550px) {
   .popup__content {
     max-width: 88.125%;
     padding-left: 6.875%;

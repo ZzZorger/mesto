@@ -22,7 +22,7 @@
   opacity: 0.8;
 }
 
-@media (max-width: 425px) {
+@media (max-width: 550px) {
   .popup__save {
     margin-top: 45px;
     margin-bottom: 25px;

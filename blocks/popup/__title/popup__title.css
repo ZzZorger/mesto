@@ -9,7 +9,7 @@
   color: #000000;
 }
 
-@media (max-width: 425px) {
+@media (max-width: 550px) {
   .popup__title {
     padding-top: 25px;
     font-size: 18px;
