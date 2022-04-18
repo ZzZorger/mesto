@@ -14,7 +14,7 @@
   white-space: nowrap;
 }
 
-@media (max-width: 425px) {
+@media (max-width: 950px) {
   .profile__job{
     font-size: 14px;
     line-height: 17px;

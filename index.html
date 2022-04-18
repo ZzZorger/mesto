@@ -15,7 +15,7 @@
   <div class="page">
     <header class="header">
       <img class="header__logo" src="./images/logo.svg" alt="логотип в шапке">
-      <hr class="header__border">
+      <div class="header__border"></div>
     </header>
     <main class="content">
       <section class="profile">
@@ -31,32 +31,32 @@
       <section class="elements">
         <div class="card">
           <img class="card__img" src="./images/karachaevsk.jpg" alt="карачаевск">
-          <p class="card__name">Карачаевск</p>
+          <h3 class="card__name">Карачаевск</h3>
           <button class="card__button" type="button"></button>
         </div>
         <div class="card">
           <img class="card__img" src="./images/elbrus.jpg" alt="карачаевск">
-          <p class="card__name">Гора Эльбрус</p>
+          <h3 class="card__name">Гора Эльбрус</h3>
           <button class="card__button" type="button"></button>
         </div>
         <div class="card">
           <img class="card__img" src="./images/dombai.jpg" alt="карачаевск">
-          <p class="card__name">Домбай</p>
+          <h3 class="card__name">Домбай</h3>
           <button class="card__button" type="button"></button>
         </div>
         <div class="card">
           <img class="card__img" src="./images/elbrus.jpg" alt="карачаевск">
-          <p class="card__name">Гора Эльбрус</p>
+          <h3 class="card__name">Гора Эльбрус</h3>
           <button class="card__button" type="button"></button>
         </div>
         <div class="card">
           <img class="card__img" src="./images/dombai.jpg" alt="карачаевск">
-          <p class="card__name">Домбай</p>
+          <h3 class="card__name">Домбай</h3>
           <button class="card__button" type="button"></button>
         </div>
         <div class="card">
           <img class="card__img" src="./images/karachaevsk.jpg" alt="карачаевск">
-          <p class="card__name">Карачаево-Черкесия</p>
+          <h3 class="card__name">Карачаево-Черкесия</h3>
           <button class="card__button" type="button"></button>
         </div>
       </section>
@@ -71,11 +71,13 @@
       <button class="popup__close" type="button"></button>
       <div class="popup__body">
         <h2 class="popup__title">Редактировать профиль</h2>
-        <input type="text" class="popup__name" value="">
-        <hr class="popup__border">
-        <input type="text" class="popup__job" value="">
-        <hr class="popup__border">
-        <button class="popup__save" type="submit">Сохранить</button>
+        <form class="popup__form" name="profile_data">
+          <fieldset class="popup__fieldset">
+            <input class="popup__input popup__input_type_name" type="text" value="">
+            <input class="popup__input popup__input_type_job" type="text" value="">
+          </fieldset>
+          <button class="popup__save" type="button">Сохранить</button>
+        </form>
       </div>
     </div>
   </div>

@@ -1,7 +1,6 @@
 .header__border {
   opacity: 0.7;
   margin: 0;
-  border: 1px solid #545454;
-  border-width: 0 0 1px;
+  border-bottom: 1px solid #545454;
   padding-top: 41px;
 }

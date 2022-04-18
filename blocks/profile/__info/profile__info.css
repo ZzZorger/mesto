@@ -7,7 +7,7 @@
   flex-basis: calc(100% - 180px);
 }
 
-@media (max-width: 425px) {
+@media (max-width: 950px) {
   .profile__info {
     column-gap: 10px;
     padding: 0;

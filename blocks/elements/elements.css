@@ -6,7 +6,7 @@
   row-gap: 20px;
 }
 
-@media (max-width: 425px) {
+@media (max-width: 1279px) {
   .elements {
     padding: 36px 5.9375% 0;
     justify-content: center;
