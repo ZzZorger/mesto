@@ -5,4 +5,5 @@
   display: grid;
   grid-template-columns: max-content 42px;
   grid-template-rows: 1fr 80px;
+  box-sizing: border-box;
 }
