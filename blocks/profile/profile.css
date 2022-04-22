@@ -1,5 +1,7 @@
 .profile {
-  padding: 40px 15.625% 0;
+  padding: 40px 0 0;
+  max-width: 880px;
+  margin: 0 auto;
   display: flex;
   align-items: center;
 }
@@ -7,7 +9,8 @@
 @media (max-width: 950px) {
   .profile {
     flex-direction: column;
-    padding: 42px 19px 0;
+    padding: 42px 0 0;
+    max-width: 282px;
     justify-content: center;
   }
 }

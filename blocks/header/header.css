@@ -2,13 +2,11 @@
   padding: 45px 0 37px;
   border-bottom: 1px solid rgba(84, 84, 84, .7);
   max-width: 880px;
-  margin-right: 15.625%;
-  margin-left: 15.625%;
+  margin: 0 auto;
 }
 
-@media (max-width: 425px) {
+@media (max-width: 900px) {
   .header {
     padding: 0 0 27.6px;
-    margin: 0;
   }
 }
