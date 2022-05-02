@@ -4,7 +4,7 @@ const popupContainer = document.querySelector('.body');
 const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__job');
 const cardContainer = document.querySelector('.elements');
-const imgPopupContainer = document.querySelector('.body');
+const body = document.querySelector('.body');
 const initialPopupData = [
   {
     title: 'Редактировать профиль',
@@ -55,7 +55,7 @@ const initialCards = [
 const popupTemplate = document.querySelector('#popup').content.querySelector('.popup');
 const profileCardTemplate = document.querySelector('#card-template').content.querySelector('.card');
 const imgPopupTemplate = document.querySelector('#img-popup').content.querySelector('.img-popup');
-
+console.log(imgPopupTemplate);
 const deleteProfileCardHandler = (evt) => {
   evt.target.closest('.card').remove();
 };
@@ -69,11 +69,12 @@ const generateCardImgPopup = (cardData) => {
   imgPopupTitle.textContent = cardData.name;
   const imgPopupImg = newImgPopup.querySelector('.img-popup__img');
   imgPopupImg.src = cardData.link;
-  
+  console.log(newImgPopup);
   return newImgPopup;
 }
-const imgPopupOpen = (evt) => {
-  evt.target.closest('.card__img').generateCardImgPopup();
+const imgPopupOpen = (cardData) => {
+  // body.append(generateCardImgPopup(cardData));
+  console.log('done!');
 }
 
 // Заполнение шаблонов
@@ -122,8 +123,12 @@ const renderPopup = (popupData) => {
 // Добавление карточки
 const renderAddCard = (cardData) => {
   cardContainer.prepend(generateProfileCard(cardData));
-  // imgPopupContainer.append(generateCardImgPopup(cardData));
+  body.append(generateCardImgPopup(cardData));
 }
+// Добавление img-popup
+// const renderImgPopup = (cardData) => {
+//   body.append(generateCardImgPopup(cardData));
+// }
 
 // Переработка начальных popup
 initialPopupData.forEach((popupData) => {
@@ -181,6 +186,7 @@ function popupProfileSubmitHandler(evt) {
 const popupAddCardSubmitHandler = (evt) => {
   evt.preventDefault();
   renderAddCard({ name: popupCardName.value, link: popupCardPlace.value });
+  // body.append(generateCardImgPopup(cardData));
   popupCardName.value = "";
   popupCardPlace.value = "";
   popupAddCardClose();
