@@ -1,9 +1,11 @@
-const popupProfileEditButton = document.querySelector('.profile__edit-button')
-const popupAddCardButton = document.querySelector('.profile__add-button')
+const log = console.log;
+const popupProfileEditButton = document.querySelector('.profile__edit-button');
+const popupAddCardButton = document.querySelector('.profile__add-button');
 const popupContainer = document.querySelector('.body');
 const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__job');
 const cardContainer = document.querySelector('.elements');
+
 const initialPopupData = [
   {
     title: 'Редактировать профиль',
@@ -152,8 +154,21 @@ const popupAddCardSubmitHandler = (evt) => {
   popupCardName.value = "";
   popupCardPlace.value = "";
 };
+// Функция лайк
+// document.addEventListener('click', ({ target }) => {
+//   const likeBtn = target.closest('.card__like-button');
 
-
+//   if (!likeBtn) return;
+//   likeBtn.ariaPressed = likeBtn.ariaPressed === "true" ? "false" : "true";
+//   likeBtn.ariaLabel = aria.label[likeBtn.ariaPressed];
+// })
+const likeBtnHandler = () => {
+  const card = document.closest('.card');
+  const likeBtn = card.querySelector('.card__like_button');
+  log(card, likeBtn)
+  likeBtn.classList.toggle('card__like-button_active');
+}
+const cardLikeBtn = document.querySelectorAll('.card__like_button');
 
 // Обработчики событий
 popupProfileEditButton.addEventListener('click', popupProfileEditOpen);
@@ -162,4 +177,5 @@ popupAddCardButton.addEventListener('click', popupAddCardOpen);
 popupAddCardCloseButton.addEventListener('click', popupAddCardClose);
 popupProfileEditForm.addEventListener('submit', popupProfileSubmitHandler);
 popupAddCardForm.addEventListener('submit', popupAddCardSubmitHandler);
+// cardLikeBtn.addEventListener('click', likeBtnHandler);
 
