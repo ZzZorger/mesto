@@ -115,6 +115,7 @@ const generateProfileCard = (cardData) => {
 const imgPopupOpenHandler = (evt) => {
   imgPopup.classList.add('img-popup_is-opened');
   imgPopupSrc.src = evt.target.closest('.card__img').src;
+  imgPopupSrc.alt = evt.target.closest('.card').querySelector('.card__name').textContent;
   imgPopupTitle.textContent = evt.target.closest('.card').querySelector('.card__name').textContent;
 }
 
