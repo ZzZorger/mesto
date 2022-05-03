@@ -5,10 +5,6 @@ const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__job');
 const cardContainer = document.querySelector('.elements');
 const body = document.querySelector('.body');
-const imgPopup = document.querySelector('.img-popup');
-const imgPopupSrc = imgPopup.querySelector('.img-popup__img');
-const imgPopupTitle = imgPopup.querySelector('.img-popup__title');
-const imgPopupCloseBtn = imgPopup.querySelector('.popup__close-button');
 const initialPopupData = [
   {
     title: 'Редактировать профиль',
@@ -58,6 +54,9 @@ const initialCards = [
 // Шаблоны
 const popupTemplate = document.querySelector('#popup').content.querySelector('.popup');
 const profileCardTemplate = document.querySelector('#card-template').content.querySelector('.card');
+const imgPopupTemplate = document.querySelector('#img-popup').content.querySelector('.img-popup');
+
+// Добавить imgpopup
 
 // Функция удалить карточку
 const deleteProfileCardHandler = (evt) => {
@@ -113,10 +112,24 @@ const generateProfileCard = (cardData) => {
 
 // Функция открыть картинку
 const imgPopupOpenHandler = (evt) => {
+  const imgPopup = imgPopupTemplate.cloneNode(true);
+
+  // const imgPopup = document.querySelector('.img-popup');
+  const imgPopupSrc = imgPopup.querySelector('.img-popup__img');
+  const imgPopupTitle = imgPopup.querySelector('.img-popup__title');
+  const imgPopupCloseBtn = imgPopup.querySelector('.popup__close-button');
   imgPopup.classList.add('img-popup_is-opened');
   imgPopupSrc.src = evt.target.closest('.card__img').src;
   imgPopupSrc.alt = evt.target.closest('.card').querySelector('.card__name').textContent;
   imgPopupTitle.textContent = evt.target.closest('.card').querySelector('.card__name').textContent;
+  // Функция закрытия ImgPopup
+  function imgPopupAddCardClose() {
+    imgPopup.classList.remove('img-popup_is-opened');
+    imgPopup.remove();
+  }
+  imgPopupCloseBtn.addEventListener('click', imgPopupAddCardClose);
+  body.append(imgPopup);
+
 }
 
 
@@ -174,10 +187,7 @@ function popupAddCardOpen() {
 function popupAddCardClose() {
   popupAddCard.classList.remove('popup_is-opened');
 }
-// Функция закрытия ImgPopup
-function imgPopupAddCardClose() {
-  imgPopup.classList.remove('img-popup_is-opened');
-}
+
 
 // Функция сохранения данных popupProfileEdit при нажатии на кнопку
 function popupProfileSubmitHandler(evt) {
@@ -195,6 +205,6 @@ popupAddCardButton.addEventListener('click', popupAddCardOpen);
 popupAddCardCloseButton.addEventListener('click', popupAddCardClose);
 popupProfileEditForm.addEventListener('submit', popupProfileSubmitHandler);
 popupAddCardForm.addEventListener('submit', popupAddCardSubmitHandler);
-imgPopupCloseBtn.addEventListener('click', imgPopupAddCardClose);
+
 
 
