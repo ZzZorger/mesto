@@ -58,7 +58,6 @@ const initialCards = [
 // Шаблоны
 const popupTemplate = document.querySelector('#popup').content.querySelector('.popup');
 const profileCardTemplate = document.querySelector('#card-template').content.querySelector('.card');
-// const imgPopupTemplate = document.querySelector('#img-popup').content.querySelector('.img-popup');
 
 // Функция удалить карточку
 const deleteProfileCardHandler = (evt) => {
@@ -78,23 +77,6 @@ const popupAddCardSubmitHandler = (evt) => {
   popupCardPlace.value = "";
   popupAddCardClose();
 };
-// // Функция добавления попапа с картинкой
-// // Создание попапа с картинкой
-// const generateCardImgPopup = (title, link) => {
-//   const newImgPopup = imgPopupTemplate.cloneNode(true);
-
-//   const imgPopupTitle = newImgPopup.querySelector('.img-popup__title');
-//   imgPopupTitle.textContent = title;
-//   const imgPopupImg = newImgPopup.querySelector('.img-popup__img');
-//   imgPopupImg.src = link;
-//   return newImgPopup;
-// }
-// Добавление попапа с картинкой на страницу
-// const imgPopupData = (cardData) => {
-//   imgPopupSrc.src = cardData.link;
-//   imgPopupTitle.textContent = cardData.name;
-//   imgPopup.classList.add('popup_is-opened');
-// }
 
 // Заполнение шаблонов
 // popups
@@ -146,7 +128,6 @@ const renderPopup = (popupData) => {
 // Добавление карточки
 const renderAddCard = (cardData) => {
   cardContainer.prepend(generateProfileCard(cardData));
-  // body.append(generateCardImgPopup(cardData));
 }
 
 // Переработка начальных popup
@@ -160,13 +141,13 @@ initialCards.forEach((cardData) => {
 
 // Инициализация элементов новых popup
 // Редактирование профиля
-const popupProfileEdit = document.querySelector('.'+initialPopupData[0].specClass);
+const popupProfileEdit = document.querySelector('.' + initialPopupData[0].specClass);
 const popupProfileEditCloseButton = popupProfileEdit.querySelector('.popup__close-button');
 const popupProfileName = popupProfileEdit.querySelector('.popup__input_type_name');
 const popupProfilePlace = popupProfileEdit.querySelector('.popup__input_type_place');
 const popupProfileEditForm = popupProfileEdit.querySelector('.popup__form');
 // Добавление карточки
-const popupAddCard = document.querySelector('.'+initialPopupData[1].specClass);
+const popupAddCard = document.querySelector('.' + initialPopupData[1].specClass);
 const popupAddCardCloseButton = popupAddCard.querySelector('.popup__close-button');
 const popupCardName = popupAddCard.querySelector('.popup__input_type_name');
 const popupCardPlace = popupAddCard.querySelector('.popup__input_type_place');
