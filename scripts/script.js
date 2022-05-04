@@ -5,6 +5,14 @@ const profileJob = document.querySelector('.profile__job');
 const cardContainer = document.querySelector('.elements');
 const body = document.querySelector('.body');
 const imgPopup = document.querySelector('.img-popup');
+const popupWindow = document.querySelector('.popup');
+const popupWindowClose = popupWindow.querySelector('.popup__close-button');
+const popupForm = popupWindow.querySelector('.popup__form');
+const popupSaveBtn = popupWindow.querySelector('.popup__save-button');
+const popupTitle = popupWindow.querySelector('.popup__title');
+const popupProfileName = popupWindow.querySelector('.popup__input_type_name');
+const popupProfilePlace = popupWindow.querySelector('.popup__input_type_place');
+const profileCardTemplate = document.querySelector('#card-template').content.querySelector('.card');
 const initialCards = [
   {
     name: 'Архыз',
@@ -31,8 +39,7 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
-// Шаблоны
-const profileCardTemplate = document.querySelector('#card-template').content.querySelector('.card');
+
 
 // Функция удалить карточку
 const deleteProfileCardHandler = (evt) => {
@@ -42,8 +49,11 @@ const deleteProfileCardHandler = (evt) => {
 const likeProfileCardHandler = (evt) => {
   evt.target.closest('.card__like-button').classList.toggle('card__like-button_active');
 }
-
-// Карточки
+// Функция закрытия ImgPopup
+function imgPopupAddCardClose() {
+  imgPopup.classList.remove('img-popup_is-opened');
+}
+// Функция создать карточку
 const generateProfileCard = (cardData) => {
   const newProfileCard = profileCardTemplate.cloneNode(true);
   const titleProfileCard = newProfileCard.querySelector('.card__name');
@@ -57,11 +67,6 @@ const generateProfileCard = (cardData) => {
   likeProfileCard.addEventListener('click', likeProfileCardHandler);
   pictureProfileCard.addEventListener('click', imgPopupOpenHandler);
   return newProfileCard;
-}
-
-// Функция закрытия ImgPopup
-function imgPopupAddCardClose() {
-  imgPopup.classList.remove('img-popup_is-opened');
 }
 // Функция открыть картинку
 const imgPopupOpenHandler = (evt) => {
@@ -78,20 +83,11 @@ const imgPopupOpenHandler = (evt) => {
 const renderAddCard = (cardData) => {
   cardContainer.prepend(generateProfileCard(cardData));
 }
-// Переработка карточек
+// Переработка начальных карточек
 initialCards.forEach((cardData) => {
   renderAddCard(cardData);
 });
-
-// Доработка попапов
-const popupWindow = document.querySelector('.popup');
-const popupWindowClose = popupWindow.querySelector('.popup__close-button');
-const popupForm = popupWindow.querySelector('.popup__form');
-const popupSaveBtn = popupWindow.querySelector('.popup__save-button');
-const popupTitle = popupWindow.querySelector('.popup__title');
-const popupProfileName = popupWindow.querySelector('.popup__input_type_name');
-const popupProfilePlace = popupWindow.querySelector('.popup__input_type_place');
-
+// Функция открыть попап профиля
 function popupProfileOpen() {
   popupProfileName.value = profileName.textContent;
   popupProfilePlace.value = profileJob.textContent;
@@ -99,6 +95,7 @@ function popupProfileOpen() {
   popupTitle.textContent = 'Редактировать профиль';
   popupWindow.classList.add('popup-profile', 'popup_is-opened');
 }
+// Функция открыть попап карточки
 function popupAddCardOpen() {
   popupProfileName.placeholder = 'Название';
   popupProfilePlace.placeholder = 'Ссылка на картинку';
@@ -106,11 +103,12 @@ function popupAddCardOpen() {
   popupTitle.textContent = 'Новое место';
   popupWindow.classList.add('popup-card', 'popup_is-opened');
 }
+// Функция закрыть попап
 function popupClose() {
   popupWindow.classList.remove('popup_is-opened', 'popup-card', 'popup-profile');
   popupForm.reset();
 }
-
+// Функция сохранить попап
 function popupSubmit(evt) {
   evt.preventDefault();
   if (popupWindow.classList.contains('popup-profile') == true) {
