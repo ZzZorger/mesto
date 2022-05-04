@@ -6,7 +6,7 @@ const cardContainer = document.querySelector('.elements');
 const body = document.querySelector('.body');
 const imgPopup = document.querySelector('.img-popup');
 const popupWindow = document.querySelector('.popup');
-const popupWindowClose = popupWindow.querySelector('.popup__close-button');
+const popupWindowClose = popupWindow.querySelector('.close-button');
 const popupForm = popupWindow.querySelector('.popup__form');
 const popupSaveBtn = popupWindow.querySelector('.popup__save-button');
 const popupTitle = popupWindow.querySelector('.popup__title');
@@ -72,7 +72,7 @@ const generateProfileCard = (cardData) => {
 const imgPopupOpenHandler = (evt) => {
   const imgPopupSrc = imgPopup.querySelector('.img-popup__img');
   const imgPopupTitle = imgPopup.querySelector('.img-popup__title');
-  const imgPopupCloseBtn = imgPopup.querySelector('.popup__close-button');
+  const imgPopupCloseBtn = imgPopup.querySelector('.close-button');
   imgPopup.classList.add('img-popup_is-opened');
   imgPopupSrc.src = evt.target.closest('.card__img').src;
   imgPopupSrc.alt = evt.target.closest('.card').querySelector('.card__name').textContent;
