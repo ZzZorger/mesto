@@ -42,31 +42,26 @@
       <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
     </footer>
   </div>
-
-  <template id="popup">
-    <div class="popup">
-      <div class="popup__content">
-        <button class="popup__close-button" type="button" aria-label="закрыть окно"></button>
-        <h2 class="popup__title"></h2>
-        <form class="popup__form" name="popup_data">
-          <fieldset class="popup__fieldset">
-            <input class="popup__input popup__input_type_name" type="text" name="name" required>
-            <input class="popup__input popup__input_type_place" type="text" name="place" required>
-          </fieldset>
-          <button class="popup__save-button" type="submit"></button>
-        </form>
-      </div>
+  <div class="popup">
+    <div class="popup__content">
+      <button class="popup__close-button" type="button" aria-label="закрыть окно"></button>
+      <h2 class="popup__title"></h2>
+      <form class="popup__form" name="popup_data">
+        <fieldset class="popup__fieldset">
+          <input class="popup__input popup__input_type_name" type="text" name="name" required autocomplete="off">
+          <input class="popup__input popup__input_type_place" type="text" name="place" required autocomplete="off">
+        </fieldset>
+        <button class="popup__save-button" type="submit"></button>
+      </form>
     </div>
-  </template>
-  <template id="img-popup">
-    <div class="img-popup">
-      <div class="img-popup__content">
-        <button class="popup__close-button" type="button" aria-label="закрыть окно"></button>
-        <img class="img-popup__img">
-        <h2 class="img-popup__title"></h2>
-      </div>
+  </div>
+  <div class="img-popup">
+    <div class="img-popup__content">
+      <button class="popup__close-button" type="button" aria-label="закрыть окно"></button>
+      <img class="img-popup__img" src="data:," alt="Alternative Text">
+      <h2 class="img-popup__title"></h2>
     </div>
-  </template>
+  </div>
   <script src="./scripts/script.js"></script>
 </body>
 
