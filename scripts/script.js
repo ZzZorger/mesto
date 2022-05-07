@@ -59,10 +59,6 @@ const deleteProfileCardHandler = (evt) => {
 const likeProfileCardHandler = (evt) => {
   evt.target.closest('.card__like-button').classList.toggle('card__like-button_active');
 }
-// Функция закрытия ImgPopup
-function imgPopupAddCardClose() {
-  imgPopup.classList.remove('img-popup_is-opened');
-}
 // Функция создать карточку
 const generateProfileCard = (cardData) => {
   const newProfileCard = profileCardTemplate.cloneNode(true);
