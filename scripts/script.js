@@ -42,6 +42,14 @@ const initialCards = [
   }
 ];
 
+// Функция открытия попапов
+function popupOpen(popupName) {
+  popupName.classList.add('popup_is-opened');
+}
+// Функция закрытия попапов
+function popupClose(popupName) {
+  popupName.classList.remove('popup_is-opened');
+}
 
 // Функция удалить карточку
 const deleteProfileCardHandler = (evt) => {
@@ -89,39 +97,36 @@ const renderAddCard = (cardData) => {
 initialCards.forEach((cardData) => {
   renderAddCard(cardData);
 });
-// Функция открытия попапов
-function popupOpen(popupName) {
-  popupName.classList.add('popup_is-opened');
-}
-// Функция открыть попап
 function profilePopupOpenHandler() {
   popupProfileName.value = profileName.textContent;
   popupProfilePlace.value = profileJob.textContent;
   popupOpen(profilePopup);
 }
-
-// Функция закрыть попап
-function popupClose(popupName, popupFormName) {
-  popupName.classList.remove('popup_is-opened');
-  popupFormName.reset();
+function profilePopupCloseHandler() {
+  popupClose(profilePopup);
+  profilePopupForm.reset();
 }
-
+function cardPopupCloseHandler() {
+  popupClose(cardPopup);
+  cardPopupForm.reset();
+}
 function profilePopupSubmitHandler(evt) {
   evt.preventDefault();
   profileName.textContent = popupProfileName.value;
   profileJob.textContent = popupProfilePlace.value;
-  popupClose(profilePopup, profilePopupForm);
+  popupClose(profilePopup);
 }
 function cardPopupSubmitHandler(evt) {
   evt.preventDefault();
   renderAddCard({ name: popupCardName.value, link: popupCardPlace.value });
-  popupClose(cardPopup, cardPopupForm);
+  cardPopupCloseHandler();
 }
 
+
 popupProfileEditButton.addEventListener('click', profilePopupOpenHandler);
-profilePopupClose.addEventListener('click', () => popupClose(profilePopup, profilePopupForm));
+profilePopupClose.addEventListener('click', profilePopupCloseHandler);
 profilePopupForm.addEventListener('submit', profilePopupSubmitHandler);
 
 popupAddCardButton.addEventListener('click', () => popupOpen(cardPopup));
-cardPopupClose.addEventListener('click', () => popupClose(cardPopup, cardPopupForm));
+cardPopupClose.addEventListener('click', cardPopupCloseHandler);
 cardPopupForm.addEventListener('submit', cardPopupSubmitHandler);
