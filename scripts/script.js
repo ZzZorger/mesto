@@ -99,38 +99,29 @@ function profilePopupOpenHandler() {
   popupProfilePlace.value = profileJob.textContent;
   popupOpen(profilePopup);
 }
-function cardPopupOpenHandler() {
-  popupOpen(cardPopup);
-}
 
 // Функция закрыть попап
 function popupClose(popupName, popupFormName) {
   popupName.classList.remove('popup_is-opened');
   popupFormName.reset();
 }
-function profilePopupCloseHandler() {
-  popupClose(profilePopup, profilePopupForm);
-}
-function cardPopupCloseHandler() {
-  popupClose(cardPopup, cardPopupForm)
-}
 
 function profilePopupSubmitHandler(evt) {
   evt.preventDefault();
   profileName.textContent = popupProfileName.value;
   profileJob.textContent = popupProfilePlace.value;
-  profilePopupCloseHandler();
+  popupClose(profilePopup, profilePopupForm);
 }
 function cardPopupSubmitHandler(evt) {
   evt.preventDefault();
   renderAddCard({ name: popupCardName.value, link: popupCardPlace.value });
-  cardPopupCloseHandler();
+  popupClose(cardPopup, cardPopupForm);
 }
 
 popupProfileEditButton.addEventListener('click', profilePopupOpenHandler);
-profilePopupClose.addEventListener('click', profilePopupCloseHandler);
+profilePopupClose.addEventListener('click', () => popupClose(profilePopup, profilePopupForm));
 profilePopupForm.addEventListener('submit', profilePopupSubmitHandler);
 
-popupAddCardButton.addEventListener('click', cardPopupOpenHandler);
-cardPopupClose.addEventListener('click', cardPopupCloseHandler);
+popupAddCardButton.addEventListener('click', () => popupOpen(cardPopup));
+cardPopupClose.addEventListener('click', () => popupClose(cardPopup, cardPopupForm));
 cardPopupForm.addEventListener('submit', cardPopupSubmitHandler);
