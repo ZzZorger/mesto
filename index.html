@@ -42,16 +42,29 @@
       <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
     </footer>
   </div>
-  <div class="popup">
+  <div class="popup popup-profile">
     <div class="popup__content">
       <button class="close-button" type="button" aria-label="закрыть окно"></button>
-      <h2 class="popup__title"></h2>
+      <h2 class="popup__title">Редактировать профиль</h2>
       <form class="popup__form" name="popup_data">
         <fieldset class="popup__fieldset">
           <input class="popup__input popup__input_type_name" type="text" name="name" required autocomplete="off">
           <input class="popup__input popup__input_type_place" type="text" name="place" required autocomplete="off">
         </fieldset>
-        <button class="popup__save-button" type="submit"></button>
+        <button class="popup__save-button" type="submit">Сохранить</button>
+      </form>
+    </div>
+  </div>
+  <div class="popup popup-card">
+    <div class="popup__content">
+      <button class="close-button" type="button" aria-label="закрыть окно"></button>
+      <h2 class="popup__title">Новое место</h2>
+      <form class="popup__form" name="popup_data">
+        <fieldset class="popup__fieldset">
+          <input class="popup__input popup__input_type_name" type="text" name="name" required autocomplete="off" placeholder="Название">
+          <input class="popup__input popup__input_type_place" type="text" name="place" required autocomplete="off" placeholder="Ссылка на картинку">
+        </fieldset>
+        <button class="popup__save-button" type="submit">Создать</button>
       </form>
     </div>
   </div>
