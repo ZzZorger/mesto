@@ -67,18 +67,18 @@ const generateProfileCard = (cardData) => {
   deleteProfileCard.addEventListener('click', deleteProfileCardHandler);
   const likeProfileCard = newProfileCard.querySelector('.card__like-button');
   likeProfileCard.addEventListener('click', likeProfileCardHandler);
-  pictureProfileCard.addEventListener('click', imgPopupOpenHandler);
+  pictureProfileCard.addEventListener('click', () => imgPopupOpenHandler(pictureProfileCard.alt, pictureProfileCard.src));
   return newProfileCard;
 }
 // Функция открыть картинку
-const imgPopupOpenHandler = (evt) => {
+const imgPopupOpenHandler = (cardTitle, cardImage) => {
   const imgPopupSrc = imgPopup.querySelector('.img-popup__img');
   const imgPopupTitle = imgPopup.querySelector('.img-popup__title');
   const imgPopupCloseBtn = imgPopup.querySelector('.close-button');
+  imgPopupTitle.textContent = cardTitle;
+  imgPopupSrc.alt = cardTitle;
+  imgPopupSrc.src = cardImage;
   imgPopup.classList.add('img-popup_is-opened');
-  imgPopupSrc.src = evt.target.closest('.card__img').src;
-  imgPopupSrc.alt = evt.target.closest('.card').querySelector('.card__name').textContent;
-  imgPopupTitle.textContent = evt.target.closest('.card').querySelector('.card__name').textContent;
   imgPopupCloseBtn.addEventListener('click', imgPopupAddCardClose);
 }
 // Добавление карточки
