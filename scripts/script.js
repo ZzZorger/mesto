@@ -86,8 +86,8 @@ const imgPopupOpenHandler = (cardTitle, cardImage) => {
   imgPopupTitle.textContent = cardTitle;
   imgPopupSrc.alt = cardTitle;
   imgPopupSrc.src = cardImage;
-  imgPopup.classList.add('img-popup_is-opened');
-  imgPopupCloseBtn.addEventListener('click', imgPopupAddCardClose);
+  popupOpen(imgPopup);
+  imgPopupCloseBtn.addEventListener('click', () => popupClose(imgPopup));
 }
 // Добавление карточки
 const renderAddCard = (cardData) => {
