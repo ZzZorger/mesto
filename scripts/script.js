@@ -15,6 +15,8 @@ const popupProfilePlace = profilePopup.querySelector('.popup__input_type_place')
 const popupCardName = cardPopup.querySelector('.popup__input_type_name');
 const popupCardPlace = cardPopup.querySelector('.popup__input_type_place');
 const profileCardTemplate = document.querySelector('#card-template').content.querySelector('.card');
+const cardPopupSubmit = cardPopup.querySelector('.popup__save-button');
+const cardPopupInputsArray = Array.from(cardPopupForm.querySelectorAll('.popup__input'));
 const initialCards = [
   {
     name: 'Архыз',
@@ -119,8 +121,7 @@ function cardPopupSubmitHandler(evt) {
 }
 
 function cardPopupOpenHandler(evt) {
-  toggleButtonState(cardPopupInputs, cardPopupSubmit);
-  // toggleButtonState('popup__input', 'popup__save-button');
+  toggleButtonState(cardPopupInputsArray, cardPopupSubmit);
   popupOpen(cardPopup);
 }
 
