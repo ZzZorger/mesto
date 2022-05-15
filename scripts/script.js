@@ -8,6 +8,7 @@ const profilePopup = document.querySelector('.popup-profile');
 const cardPopup = document.querySelector('.popup-card');
 const profilePopupClose = profilePopup.querySelector('.close-button');
 const cardPopupClose = cardPopup.querySelector('.close-button');
+//Формы
 const profilePopupForm = profilePopup.querySelector('.popup__form');
 const cardPopupForm = cardPopup.querySelector('.popup__form');
 const popupProfileName = profilePopup.querySelector('.popup__input_type_name');
