@@ -8,7 +8,6 @@ const profilePopup = document.querySelector('.popup-profile');
 const cardPopup = document.querySelector('.popup-card');
 const profilePopupClose = profilePopup.querySelector('.close-button');
 const cardPopupClose = cardPopup.querySelector('.close-button');
-//Формы
 const profilePopupForm = profilePopup.querySelector('.popup__form');
 const cardPopupForm = cardPopup.querySelector('.popup__form');
 const popupProfileName = profilePopup.querySelector('.popup__input_type_name');
@@ -119,11 +118,17 @@ function cardPopupSubmitHandler(evt) {
   cardPopupCloseHandler();
 }
 
+function cardPopupOpenHandler(evt) {
+  toggleButtonState(cardPopupInputs, cardPopupSubmit);
+  // toggleButtonState('popup__input', 'popup__save-button');
+  popupOpen(cardPopup);
+}
 
 popupProfileEditButton.addEventListener('click', profilePopupOpenHandler);
 profilePopupClose.addEventListener('click', profilePopupCloseHandler);
 profilePopupForm.addEventListener('submit', profilePopupSubmitHandler);
 
-popupAddCardButton.addEventListener('click', () => popupOpen(cardPopup));
+// popupAddCardButton.addEventListener('click', () => popupOpen(cardPopup));
+popupAddCardButton.addEventListener('click', cardPopupOpenHandler);
 cardPopupClose.addEventListener('click', cardPopupCloseHandler);
 cardPopupForm.addEventListener('submit', cardPopupSubmitHandler);

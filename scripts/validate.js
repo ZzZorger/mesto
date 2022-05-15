@@ -1,30 +1,6 @@
-// profilePopupForm.addEventListener('submit', handleSubmitProfileForm);
-// cardPopupForm.addEventListener('submit', handleSubmitCardForm);
-// const profilePopupFieldset = profilePopup.querySelector('.popup__fieldset');
-// const cardPopupFieldset = cardPopup.querySelector('.popup__fieldset');
+const cardPopupSubmit = cardPopup.querySelector('.popup__save-button');
+const cardPopupInputs = Array.from(cardPopupForm.querySelectorAll('.popup__input'));
 
-// function validate(element) {
-//   const errorElement = document.querySelector(`error-${element}`)
-//   if(!element.checkValidity()) {
-//     errorElement.textContent = element.validationMessage;
-//   }
-// }
-
-// function handleSubmitProfileForm(evt) {
-//   evt.preventDefault();
-//   const inputs = Array.from(profilePopupFieldset.elements);
-//   inputs.forEach((element) => {
-//       validate(element);
-//   })
-// }
-
-// function handleSubmitCardForm(evt) {
-//   evt.preventDefault();
-//   const inputs = Array.from(cardPopupFieldset.elements);
-//   inputs.forEach((element) => {
-//       validate(element);
-//   })
-// }
 
 // Функция, которая добавляет класс с ошибкой
 const showInputError = (formElement, inputElement, errorMessage) => {
@@ -51,11 +27,31 @@ const isValid = (formElement, inputElement) => {
   }
 };
 
+const hasInvalidInput = (inputList) => {
+  // console.log(inputList);
+  // console.log(inputList.some((inputElement));
+  return inputList.some((inputElement) => {
+    // console.log(inputElement)
+    // console.log(!inputElement.validity.valid)
+    return !inputElement.validity.valid;
+  })
+};
+const toggleButtonState = (inputList, buttonElement) => {
+  if (hasInvalidInput(inputList)) {
+    buttonElement.classList.add('popup__save-button_type_inactive');
+  } else {
+    buttonElement.classList.remove('popup__save-button_type_inactive');
+  }
+};
+
 const setEventListeners = (formElement) => {
   const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
+  const buttonElement = formElement.querySelector('.popup__save-button');
+  // toggleButtonState(inputList, buttonElement);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
       isValid(formElement, inputElement)
+      toggleButtonState(inputList, buttonElement);
     });
   });
 };
@@ -70,16 +66,15 @@ const enableValidation = () => {
   });
 };
 
+// включение валидации вызовом enableValidation
+// все настройки передаются при вызове
+const object = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__save-button',
+  inactiveButtonClass: '.popup__save-button_type_inactive',
+  inputErrorClass: '.popup__error',
+  errorClass: '.popup__error_type_active'
+};
+
 enableValidation();
-
-// formElement.addEventListener('submit', function (evt) {
-//   evt.preventDefault();
-// });
-
-// Вызовем функцию isValid на каждый ввод символа
-// formInput.addEventListener('input', isValid);
-
-// popupProfileName.addEventListener('input', () => isValid(popupProfileName));
-// popupProfilePlace.addEventListener('input', () => isValid(popupProfilePlace));
-// popupCardName.addEventListener('input', () => isValid(popupCardName));
-// popupCardPlace.addEventListener('input', () => isValid(popupCardPlace));
