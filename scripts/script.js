@@ -52,7 +52,6 @@ function popupOpen(popupName) {
 function popupClose(popupName) {
   popupName.classList.remove('popup_is-opened');
 }
-
 // Функция удалить карточку
 const deleteProfileCardHandler = (evt) => {
   evt.target.closest('.card').remove();
@@ -60,6 +59,12 @@ const deleteProfileCardHandler = (evt) => {
 // Функция лайкнуть карточку
 const likeProfileCardHandler = (evt) => {
   evt.target.closest('.card__like-button').classList.toggle('card__like-button_active');
+}
+// Функция закрытия при нажатии на оверлей
+function popupOverlayClickHandler(evt) {
+  if (evt.target === evt.currentTarget) {
+    popupClose(evt.target);
+  }
 }
 // Функция создать карточку
 const generateProfileCard = (cardData) => {
@@ -86,6 +91,7 @@ const imgPopupOpenHandler = (cardTitle, cardImage) => {
   imgPopupSrc.src = cardImage;
   popupOpen(imgPopup);
   imgPopupCloseBtn.addEventListener('click', () => popupClose(imgPopup));
+  document.addEventListener('keydown', () => escClosePopupHandler(imgPopup));
 }
 // Добавление карточки
 const renderAddCard = (cardData) => {
@@ -95,9 +101,23 @@ const renderAddCard = (cardData) => {
 initialCards.forEach((cardData) => {
   renderAddCard(cardData);
 });
+// Функция закрытия при нажатии на Esc
+function escClosePopupHandler(popupName, popupForm = 'null') {
+  document.addEventListener('keydown', (evt) => {
+    if (evt.key === 'Escape') {
+      popupClose(popupName);
+      if (popupForm !== 'null') {
+        popupForm.reset();
+      }
+    }
+  });
+}
 function profilePopupOpenHandler() {
   popupProfileName.value = profileName.textContent;
   popupProfilePlace.value = profileJob.textContent;
+  escClosePopupHandler(profilePopup, profilePopupForm);
+  hideInputError(profilePopupForm, popupProfileName);
+  hideInputError(profilePopupForm, popupProfilePlace);
   popupOpen(profilePopup);
 }
 function profilePopupCloseHandler() {
@@ -121,6 +141,9 @@ function cardPopupSubmitHandler(evt) {
 }
 
 function cardPopupOpenHandler(evt) {
+  escClosePopupHandler(cardPopup, cardPopupForm);
+  hideInputError(cardPopupForm, popupCardName);
+  hideInputError(cardPopupForm, popupCardPlace);
   toggleButtonState(cardPopupInputsArray, cardPopupSubmit);
   popupOpen(cardPopup);
 }
@@ -128,8 +151,9 @@ function cardPopupOpenHandler(evt) {
 popupProfileEditButton.addEventListener('click', profilePopupOpenHandler);
 profilePopupClose.addEventListener('click', profilePopupCloseHandler);
 profilePopupForm.addEventListener('submit', profilePopupSubmitHandler);
-
-// popupAddCardButton.addEventListener('click', () => popupOpen(cardPopup));
+profilePopup.addEventListener('click', popupOverlayClickHandler);
 popupAddCardButton.addEventListener('click', cardPopupOpenHandler);
 cardPopupClose.addEventListener('click', cardPopupCloseHandler);
 cardPopupForm.addEventListener('submit', cardPopupSubmitHandler);
+cardPopup.addEventListener('click', popupOverlayClickHandler);
+imgPopup.addEventListener('click', popupOverlayClickHandler);

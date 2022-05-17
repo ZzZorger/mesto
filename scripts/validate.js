@@ -56,7 +56,7 @@ const setEventListeners = (formElement) => {
     });
   });
 };
- 
+
 const enableValidation = () => {
   const formList = Array.from(document.querySelectorAll(popupData.formSelector));
   formList.forEach((formElement) => {
