@@ -157,3 +157,4 @@ cardPopupClose.addEventListener('click', cardPopupCloseHandler);
 cardPopupForm.addEventListener('submit', cardPopupSubmitHandler);
 cardPopup.addEventListener('click', popupOverlayClickHandler);
 imgPopup.addEventListener('click', popupOverlayClickHandler);
+
