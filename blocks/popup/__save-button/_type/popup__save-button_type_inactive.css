@@ -4,7 +4,7 @@
   background: white;
   color: #000000;
   border-radius: 2px;
-  cursor: unset;
+  cursor: default;
 }
 
 .popup__save-button_type_inactive:hover {
