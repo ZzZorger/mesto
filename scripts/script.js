@@ -91,7 +91,7 @@ const imgPopupOpenHandler = (cardTitle, cardImage) => {
   imgPopupSrc.src = cardImage;
   popupOpen(imgPopup);
   imgPopupCloseBtn.addEventListener('click', () => popupClose(imgPopup));
-  document.addEventListener('keydown', () => escClosePopupHandler(imgPopup));
+  escClosePopupHandler(imgPopup);
 }
 // Добавление карточки
 const renderAddCard = (cardData) => {
@@ -140,12 +140,19 @@ function cardPopupSubmitHandler(evt) {
   cardPopupCloseHandler();
 }
 
-function cardPopupOpenHandler(evt) {
+function cardPopupOpenHandler() {
   escClosePopupHandler(cardPopup, cardPopupForm);
   hideInputError(cardPopupForm, popupCardName);
   hideInputError(cardPopupForm, popupCardPlace);
   toggleButtonState(cardPopupInputsArray, cardPopupSubmit);
   popupOpen(cardPopup);
+}
+
+function cardPopupOverlayClickHandler(evt) {
+  if (evt.target === evt.currentTarget) {
+    popupClose(evt.target);
+    cardPopupForm.reset();
+  }
 }
 
 popupProfileEditButton.addEventListener('click', profilePopupOpenHandler);
@@ -155,6 +162,6 @@ profilePopup.addEventListener('click', popupOverlayClickHandler);
 popupAddCardButton.addEventListener('click', cardPopupOpenHandler);
 cardPopupClose.addEventListener('click', cardPopupCloseHandler);
 cardPopupForm.addEventListener('submit', cardPopupSubmitHandler);
-cardPopup.addEventListener('click', popupOverlayClickHandler);
+cardPopup.addEventListener('click', cardPopupOverlayClickHandler);
 imgPopup.addEventListener('click', popupOverlayClickHandler);
 
