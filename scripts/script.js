@@ -50,10 +50,12 @@ const initialCards = [
 // Функция открытия попапов
 function openPopup(popupName) {
   popupName.classList.add('popup_is-opened');
+  document.addEventListener('keydown', closeByEscape);
 }
 // Функция закрытия попапов
 function closePopup(popupName) {
   popupName.classList.remove('popup_is-opened');
+  document.removeEventListener('keydown', closeByEscape);
 }
 // Функция удалить карточку
 const deleteProfileCardHandler = (evt) => {
@@ -82,7 +84,6 @@ const generateProfileCard = (cardData) => {
   const likeProfileCard = newProfileCard.querySelector('.card__like-button');
   likeProfileCard.addEventListener('click', likeProfileCardHandler);
   pictureProfileCard.addEventListener('click', () => openImgPopupHandler(pictureProfileCard.alt, pictureProfileCard.src));
-
   return newProfileCard;
 }
 
@@ -92,7 +93,6 @@ const openImgPopupHandler = (cardTitle, cardImage) => {
   imgPopupSrc.alt = cardTitle;
   imgPopupSrc.src = cardImage;
   openPopup(imgPopup);
-  closeEscBtn(imgPopup);
 }
 // Добавление карточки
 const renderAddCard = (cardData) => {
@@ -103,31 +103,25 @@ initialCards.forEach((cardData) => {
   renderAddCard(cardData);
 });
 // Функция закрытия при нажатии на Esc
-function closeEscBtn(popupName, popupForm = 'null') {
-  document.addEventListener('keydown', (evt) => {
-    if (evt.key === 'Escape') {
-      closePopup(popupName);
-      if (popupForm !== 'null') {
-        popupForm.reset();
-      }
-    }
-  });
+function closeByEscape(evt) {
+  if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_is-opened');
+    closePopup(openedPopup);
+  }
 }
+
 function openProfilePopupHandler() {
   popupProfileName.value = profileName.textContent;
   popupProfilePlace.value = profileJob.textContent;
-  closeEscBtn(profilePopup, profilePopupForm);
   hideInputError(profilePopupForm, popupProfileName, popupData);
   hideInputError(profilePopupForm, popupProfilePlace, popupData);
   openPopup(profilePopup);
 }
 function closeProfilePopupHandler() {
   closePopup(profilePopup);
-  profilePopupForm.reset();
 }
 function closeCardPopupHandler() {
   closePopup(cardPopup);
-  cardPopupForm.reset();
 }
 function submitProfilePopupHandler(evt) {
   evt.preventDefault();
@@ -142,7 +136,7 @@ function submitCardPopupHandler(evt) {
 }
 
 function openCardPopupHandler() {
-  closeEscBtn(cardPopup, cardPopupForm);
+  cardPopupForm.reset();
   hideInputError(cardPopupForm, popupCardName, popupData);
   hideInputError(cardPopupForm, popupCardPlace, popupData);
   toggleButtonState(cardPopupInputsArray, cardPopupSubmit, popupData);
@@ -152,7 +146,6 @@ function openCardPopupHandler() {
 function closeOverlayCardClickHandler(evt) {
   if (evt.target === evt.currentTarget) {
     closePopup(evt.target);
-    cardPopupForm.reset();
   }
 }
 
