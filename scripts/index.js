@@ -1,3 +1,5 @@
+// import {hideInputError, toggleButtonState, popupData} from '../scripts/FormValidator.js';
+
 const popups = document.querySelectorAll('.popup');
 const popupProfileEditButton = document.querySelector('.profile__edit-button');
 const popupAddCardButton = document.querySelector('.profile__add-button');

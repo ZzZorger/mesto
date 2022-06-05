@@ -47,10 +47,8 @@ class Card {
     this._element.querySelector('.card__img').src = this._link;
     this._element.querySelector('.card__img').alt = this._name;
     this._element.querySelector('.card__name').textContent = this._name;
-    const deleteProfileCard = this._element.querySelector('.card__delete-button');
-    deleteProfileCard.addEventListener('click', deleteProfileCardHandler);
-    const likeProfileCard = this._element.querySelector('.card__like-button');
-    likeProfileCard.addEventListener('click', likeProfileCardHandler);
+    this._element.querySelector('.card__delete-button').addEventListener('click', deleteProfileCardHandler);
+    this._element.querySelector('.card__like-button').addEventListener('click', likeProfileCardHandler);
     const pictureProfileCard = this._element.querySelector('.card__img');
     pictureProfileCard.addEventListener('click', () => openImgPopupHandler(pictureProfileCard.alt, pictureProfileCard.src));
     return this._element;
