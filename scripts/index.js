@@ -1,3 +1,5 @@
+import { renderAddCard } from "./Card.js";
+
 const popups = document.querySelectorAll('.popup');
 const popupProfileEditButton = document.querySelector('.profile__edit-button');
 const popupAddCardButton = document.querySelector('.profile__add-button');
@@ -13,6 +15,8 @@ const popupProfileName = profilePopup.querySelector('.popup__input_type_name');
 const popupProfilePlace = profilePopup.querySelector('.popup__input_type_place');
 export const imgPopupSrc = imgPopup.querySelector('.img-popup__img');
 export const imgPopupTitle = imgPopup.querySelector('.img-popup__title');
+const popupCardName = cardPopup.querySelector('.popup__input_type_name');
+const popupCardPlace = cardPopup.querySelector('.popup__input_type_place');
 
 
 // Функция открытия попапов
@@ -59,7 +63,7 @@ function submitProfilePopupHandler(evt) {
 }
 function submitCardPopupHandler(evt) {
   evt.preventDefault();
-  // renderAddCard({ name: popupCardName.value, link: popupCardPlace.value });
+  renderAddCard({ name: popupCardName.value, link: popupCardPlace.value });
   closePopup(cardPopup);
 }
 

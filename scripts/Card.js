@@ -56,7 +56,7 @@ export class Card {
     imgPopupSrc.src = cardImage;
     openPopup(imgPopup);
   }
-  
+
   generateCard() {
     this._element = this._getTemplate();
     this._element.querySelector('.card__img').src = this._link;
@@ -71,8 +71,12 @@ export class Card {
 }
 
 initialCards.forEach((item) => {
-	const card = new Card(item.name, item.link);
+  renderAddCard(item);
+});
+
+export function renderAddCard(item) {
+  const card = new Card(item.name, item.link);
 	const cardElment = card.generateCard();
   cardContainer.prepend(cardElment);
-});
+}
 
