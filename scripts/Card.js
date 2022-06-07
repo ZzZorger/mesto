@@ -1,4 +1,4 @@
-import {cardContainer, deleteProfileCardHandler, likeProfileCardHandler, openImgPopupHandler} from '../scripts/index.js';
+import {cardContainer, openPopup} from '../scripts/index.js';
 
 const initialCards = [
   {
@@ -27,7 +27,7 @@ const initialCards = [
   }
 ];
 
-class Card {
+export class Card {
   constructor(name, link) {
     this._name = name;
     this._link = link;
@@ -41,20 +41,32 @@ class Card {
     .cloneNode(true);
     return cardElment;
   }
-
+  // _deleteProfileCardHandler (evt) {
+  //   evt.target.closest('.card').remove();
+  // };
+  _deleteProfileCardHandler (evt) {
+    evt.target.closest('.card').remove();
+  };
+  // _likeProfileCardHandler (evt) {
+  //   evt.target.closest('.card__like-button').classList.toggle('card__like-button_active');
+  // }
+  // _openImgPopupHandler = (cardTitle, cardImage) => {
+  //   imgPopupTitle.textContent = cardTitle;
+  //   imgPopupSrc.alt = cardTitle;
+  //   imgPopupSrc.src = cardImage;
+  //   openPopup(imgPopup);
+  // }
   generateCard() {
     this._element = this._getTemplate();
     this._element.querySelector('.card__img').src = this._link;
     this._element.querySelector('.card__img').alt = this._name;
     this._element.querySelector('.card__name').textContent = this._name;
-    this._element.querySelector('.card__delete-button').addEventListener('click', deleteProfileCardHandler);
-    this._element.querySelector('.card__like-button').addEventListener('click', likeProfileCardHandler);
+    this._element.querySelector('.card__delete-button').addEventListener('click', _deleteProfileCardHandler());
+    // this._element.querySelector('.card__like-button').addEventListener('click', _likeProfileCardHandler());
     const pictureProfileCard = this._element.querySelector('.card__img');
-    pictureProfileCard.addEventListener('click', () => openImgPopupHandler(pictureProfileCard.alt, pictureProfileCard.src));
+    // pictureProfileCard.addEventListener('click', () => _openImgPopupHandler(pictureProfileCard.alt, pictureProfileCard.src));
     return this._element;
   }
-
-
 }
 
 initialCards.forEach((item) => {
@@ -62,13 +74,4 @@ initialCards.forEach((item) => {
 	const cardElment = card.generateCard();
   cardContainer.prepend(cardElment);
 });
-renderAddCard ((item) => {
-  const card = new Card(item.name, item.link);
-  const cardElment = card.generateCard();
-  cardContainer.prepend(cardElment);
-});
-// Добавление карточки
-// const renderAddCard = (cardData) => {
-//   cardContainer.prepend(generateProfileCard(cardData));
-// }
 
