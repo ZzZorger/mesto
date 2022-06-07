@@ -53,6 +53,8 @@ class Card {
     pictureProfileCard.addEventListener('click', () => openImgPopupHandler(pictureProfileCard.alt, pictureProfileCard.src));
     return this._element;
   }
+
+
 }
 
 initialCards.forEach((item) => {
@@ -60,5 +62,13 @@ initialCards.forEach((item) => {
 	const cardElment = card.generateCard();
   cardContainer.prepend(cardElment);
 });
-
+renderAddCard ((item) => {
+  const card = new Card(item.name, item.link);
+  const cardElment = card.generateCard();
+  cardContainer.prepend(cardElment);
+});
+// Добавление карточки
+// const renderAddCard = (cardData) => {
+//   cardContainer.prepend(generateProfileCard(cardData));
+// }
 

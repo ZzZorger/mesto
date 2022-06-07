@@ -1,4 +1,5 @@
 // import {hideInputError, toggleButtonState, popupData} from '../scripts/FormValidator.js';
+// import {renderAddCard} from '../scripts/Card.js';
 
 const popups = document.querySelectorAll('.popup');
 const popupProfileEditButton = document.querySelector('.profile__edit-button');
@@ -6,7 +7,7 @@ const popupAddCardButton = document.querySelector('.profile__add-button');
 const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__job');
 export const cardContainer = document.querySelector('.elements');
-const imgPopup = document.querySelector('.img-popup');
+export const imgPopup = document.querySelector('.img-popup');
 const profilePopup = document.querySelector('.popup-profile');
 const cardPopup = document.querySelector('.popup-card');
 const profilePopupClose = profilePopup.querySelector('.close-button');
@@ -123,8 +124,8 @@ function closeByEscape(evt) {
 function openProfilePopupHandler() {
   popupProfileName.value = profileName.textContent;
   popupProfilePlace.value = profileJob.textContent;
-  hideInputError(profilePopupForm, popupProfileName, popupData);
-  hideInputError(profilePopupForm, popupProfilePlace, popupData);
+  // hideInputError(profilePopupForm, popupProfileName, popupData);
+  // hideInputError(profilePopupForm, popupProfilePlace, popupData);
   openPopup(profilePopup);
 }
 function submitProfilePopupHandler(evt) {
@@ -135,15 +136,15 @@ function submitProfilePopupHandler(evt) {
 }
 function submitCardPopupHandler(evt) {
   evt.preventDefault();
-  renderAddCard({ name: popupCardName.value, link: popupCardPlace.value });
+  // renderAddCard({ name: popupCardName.value, link: popupCardPlace.value });
   closePopup(cardPopup);
 }
 
 function openCardPopupHandler() {
   cardPopupForm.reset();
-  hideInputError(cardPopupForm, popupCardName, popupData);
-  hideInputError(cardPopupForm, popupCardPlace, popupData);
-  toggleButtonState(cardPopupInputsArray, cardPopupSubmit, popupData);
+  // hideInputError(cardPopupForm, popupCardName, popupData);
+  // hideInputError(cardPopupForm, popupCardPlace, popupData);
+  // toggleButtonState(cardPopupInputsArray, cardPopupSubmit, popupData);
   openPopup(cardPopup);
 }
 
