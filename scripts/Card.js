@@ -1,3 +1,5 @@
+import {cardContainer, deleteProfileCardHandler, likeProfileCardHandler, openImgPopupHandler} from '../scripts/index.js';
+
 const initialCards = [
   {
     name: 'Архыз',
@@ -24,6 +26,7 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
+
 export class Card {
   constructor(name, link) {
     this._name = name;
@@ -31,31 +34,41 @@ export class Card {
   }
 
   _getTemplate() {
-    const cardElement = document
+    const cardElment = document
     .querySelector('#card-template')
     .content
     .querySelector('.card')
     .cloneNode(true);
-    return cardElement;
+    return cardElment;
   }
 
   generateCard() {
-    this.element = this._getTemplate();
-    console.log(this.element)
+    this._element = this._getTemplate();
     this._element.querySelector('.card__img').src = this._link;
-    // this._element.querySelector('.card__img').alt = this._name;
-    // this._element.querySelector('.card__name').textContent = this._name;
-    // this._element.querySelector('.card__delete-button').addEventListener('click', deleteProfileCardHandler);
-    // this._element.querySelector('.card__like-button').addEventListener('click', likeProfileCardHandler);
-    // const pictureProfileCard = this._element.querySelector('.card__img');
-    // pictureProfileCard.addEventListener('click', () => openImgPopupHandler(pictureProfileCard.alt, pictureProfileCard.src));
-    // return this._element;
+    this._element.querySelector('.card__img').alt = this._name;
+    this._element.querySelector('.card__name').textContent = this._name;
+    this._element.querySelector('.card__delete-button').addEventListener('click', deleteProfileCardHandler);
+    this._element.querySelector('.card__like-button').addEventListener('click', likeProfileCardHandler);
+    const pictureProfileCard = this._element.querySelector('.card__img');
+    pictureProfileCard.addEventListener('click', () => openImgPopupHandler(pictureProfileCard.alt, pictureProfileCard.src));
+    return this._element;
   }
+
+
 }
 
-// Переработка начальных карточек
-initialCards.forEach((cardData) => {
-  const card = new Card(cardData.name, cardData.link);
-  const cardElement = card.generateCard();
-  cardContainer.prepend(cardElement);
+initialCards.forEach((item) => {
+	const card = new Card(item.name, item.link);
+	const cardElment = card.generateCard();
+  cardContainer.prepend(cardElment);
 });
+renderAddCard ((item) => {
+  const card = new Card(item.name, item.link);
+  const cardElment = card.generateCard();
+  cardContainer.prepend(cardElment);
+});
+// Добавление карточки
+// const renderAddCard = (cardData) => {
+//   cardContainer.prepend(generateProfileCard(cardData));
+// }
+

@@ -5,7 +5,7 @@ const popupProfileEditButton = document.querySelector('.profile__edit-button');
 const popupAddCardButton = document.querySelector('.profile__add-button');
 const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__job');
-const cardContainer = document.querySelector('.elements');
+export const cardContainer = document.querySelector('.elements');
 const imgPopup = document.querySelector('.img-popup');
 const profilePopup = document.querySelector('.popup-profile');
 const cardPopup = document.querySelector('.popup-card');
@@ -73,13 +73,13 @@ popups.forEach((popup) => {
 
 
 // Функция удалить карточку
-// const deleteProfileCardHandler = (evt) => {
-//   evt.target.closest('.card').remove();
-// };
+export const deleteProfileCardHandler = (evt) => {
+  evt.target.closest('.card').remove();
+};
 // Функция лайкнуть карточку
-// const likeProfileCardHandler = (evt) => {
-//   evt.target.closest('.card__like-button').classList.toggle('card__like-button_active');
-// }
+export const likeProfileCardHandler = (evt) => {
+  evt.target.closest('.card__like-button').classList.toggle('card__like-button_active');
+}
 
 // Функция создать карточку
 // const generateProfileCard = (cardData) => {
@@ -98,12 +98,12 @@ popups.forEach((popup) => {
 // }
 
 // Функция открыть картинку
-// const openImgPopupHandler = (cardTitle, cardImage) => {
-//   imgPopupTitle.textContent = cardTitle;
-//   imgPopupSrc.alt = cardTitle;
-//   imgPopupSrc.src = cardImage;
-//   openPopup(imgPopup);
-// }
+export const openImgPopupHandler = (cardTitle, cardImage) => {
+  imgPopupTitle.textContent = cardTitle;
+  imgPopupSrc.alt = cardTitle;
+  imgPopupSrc.src = cardImage;
+  openPopup(imgPopup);
+}
 // Добавление карточки
 // const renderAddCard = (cardData) => {
 //   cardContainer.prepend(generateProfileCard(cardData));
