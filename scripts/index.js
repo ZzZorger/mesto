@@ -36,29 +36,6 @@ popups.forEach((popup) => {
     })
 })
 
-
-// // Функция удалить карточку
-// export const deleteProfileCardHandler = (evt) => {
-//   evt.target.closest('.card').remove();
-// };
-// // Функция лайкнуть карточку
-// export const likeProfileCardHandler = (evt) => {
-//   evt.target.closest('.card__like-button').classList.toggle('card__like-button_active');
-// }
-
-// // Функция открыть картинку
-// export const openImgPopupHandler = (cardTitle, cardImage) => {
-//   imgPopupTitle.textContent = cardTitle;
-//   imgPopupSrc.alt = cardTitle;
-//   imgPopupSrc.src = cardImage;
-//   openPopup(imgPopup);
-// }
-
-// Добавление карточки
-// const renderAddCard = (cardData) => {
-//   cardContainer.prepend(generateProfileCard(cardData));
-// }
-
 // Функция закрытия при нажатии на Esc
 function closeByEscape(evt) {
   if (evt.key === 'Escape') {
