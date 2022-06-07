@@ -11,8 +11,8 @@ const profilePopupForm = profilePopup.querySelector('.popup__form');
 const cardPopupForm = cardPopup.querySelector('.popup__form');
 const popupProfileName = profilePopup.querySelector('.popup__input_type_name');
 const popupProfilePlace = profilePopup.querySelector('.popup__input_type_place');
-const imgPopupSrc = imgPopup.querySelector('.img-popup__img');
-const imgPopupTitle = imgPopup.querySelector('.img-popup__title');
+export const imgPopupSrc = imgPopup.querySelector('.img-popup__img');
+export const imgPopupTitle = imgPopup.querySelector('.img-popup__title');
 
 
 // Функция открытия попапов
