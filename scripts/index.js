@@ -1,3 +1,5 @@
+import { Card } from "./Card.js";
+
 const popups = document.querySelectorAll('.popup');
 const popupProfileEditButton = document.querySelector('.profile__edit-button');
 const popupAddCardButton = document.querySelector('.profile__add-button');
@@ -71,45 +73,47 @@ popups.forEach((popup) => {
 
 
 // Функция удалить карточку
-const deleteProfileCardHandler = (evt) => {
-  evt.target.closest('.card').remove();
-};
+// const deleteProfileCardHandler = (evt) => {
+//   evt.target.closest('.card').remove();
+// };
 // Функция лайкнуть карточку
-const likeProfileCardHandler = (evt) => {
-  evt.target.closest('.card__like-button').classList.toggle('card__like-button_active');
-}
+// const likeProfileCardHandler = (evt) => {
+//   evt.target.closest('.card__like-button').classList.toggle('card__like-button_active');
+// }
 
 // Функция создать карточку
-const generateProfileCard = (cardData) => {
-  const newProfileCard = profileCardTemplate.cloneNode(true);
-  const titleProfileCard = newProfileCard.querySelector('.card__name');
-  titleProfileCard.textContent = cardData.name;
-  const pictureProfileCard = newProfileCard.querySelector('.card__img');
-  pictureProfileCard.src = cardData.link;
-  pictureProfileCard.alt = cardData.name;
-  const deleteProfileCard = newProfileCard.querySelector('.card__delete-button');
-  deleteProfileCard.addEventListener('click', deleteProfileCardHandler);
-  const likeProfileCard = newProfileCard.querySelector('.card__like-button');
-  likeProfileCard.addEventListener('click', likeProfileCardHandler);
-  pictureProfileCard.addEventListener('click', () => openImgPopupHandler(pictureProfileCard.alt, pictureProfileCard.src));
-  return newProfileCard;
-}
+// const generateProfileCard = (cardData) => {
+//   const newProfileCard = profileCardTemplate.cloneNode(true);
+//   const titleProfileCard = newProfileCard.querySelector('.card__name');
+//   titleProfileCard.textContent = cardData.name;
+//   const pictureProfileCard = newProfileCard.querySelector('.card__img');
+//   pictureProfileCard.src = cardData.link;
+//   pictureProfileCard.alt = cardData.name;
+//   const deleteProfileCard = newProfileCard.querySelector('.card__delete-button');
+//   deleteProfileCard.addEventListener('click', deleteProfileCardHandler);
+//   const likeProfileCard = newProfileCard.querySelector('.card__like-button');
+//   likeProfileCard.addEventListener('click', likeProfileCardHandler);
+//   pictureProfileCard.addEventListener('click', () => openImgPopupHandler(pictureProfileCard.alt, pictureProfileCard.src));
+//   return newProfileCard;
+// }
 
 // Функция открыть картинку
-const openImgPopupHandler = (cardTitle, cardImage) => {
-  imgPopupTitle.textContent = cardTitle;
-  imgPopupSrc.alt = cardTitle;
-  imgPopupSrc.src = cardImage;
-  openPopup(imgPopup);
-}
+// const openImgPopupHandler = (cardTitle, cardImage) => {
+//   imgPopupTitle.textContent = cardTitle;
+//   imgPopupSrc.alt = cardTitle;
+//   imgPopupSrc.src = cardImage;
+//   openPopup(imgPopup);
+// }
 // Добавление карточки
-const renderAddCard = (cardData) => {
-  cardContainer.prepend(generateProfileCard(cardData));
-}
+// const renderAddCard = (cardData) => {
+//   cardContainer.prepend(generateProfileCard(cardData));
+// }
 // Переработка начальных карточек
-initialCards.forEach((cardData) => {
-  renderAddCard(cardData);
-});
+// initialCards.forEach((cardData) => {
+//   const card = new Card(cardData.name, cardData.link);
+//   const cardElement = card.generateCard();
+//   cardContainer.prepend(cardElement);
+// });
 // Функция закрытия при нажатии на Esc
 function closeByEscape(evt) {
   if (evt.key === 'Escape') {

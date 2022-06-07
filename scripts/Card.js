@@ -24,18 +24,16 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
-
-class Card {
-  constructor(data, templateSelector) {
-    this._name = data.name;
-    this._link = data.link;
-    this._templateSelector = templateSelector;
+export class Card {
+  constructor(name, link) {
+    this._name = name;
+    this._link = link;
   }
 
   _getTemplate() {
     const cardElement = document
     .querySelector('#card-template')
-    .textContent
+    .content
     .querySelector('.card')
     .cloneNode(true);
     return cardElement;
@@ -43,14 +41,21 @@ class Card {
 
   generateCard() {
     this.element = this._getTemplate();
+    console.log(this.element)
     this._element.querySelector('.card__img').src = this._link;
-    this._element.querySelector('.card__img').alt = this._name;
-    this._element.querySelector('.card__name').textContent = this._name;
-    this._element.querySelector('.card__delete-button').addEventListener('click', deleteProfileCardHandler);
-    this._element.querySelector('.card__like-button').addEventListener('click', likeProfileCardHandler);
-    const pictureProfileCard = this._element.querySelector('.card__img');
-    pictureProfileCard.addEventListener('click', () => openImgPopupHandler(pictureProfileCard.alt, pictureProfileCard.src));
-    return this._element;
+    // this._element.querySelector('.card__img').alt = this._name;
+    // this._element.querySelector('.card__name').textContent = this._name;
+    // this._element.querySelector('.card__delete-button').addEventListener('click', deleteProfileCardHandler);
+    // this._element.querySelector('.card__like-button').addEventListener('click', likeProfileCardHandler);
+    // const pictureProfileCard = this._element.querySelector('.card__img');
+    // pictureProfileCard.addEventListener('click', () => openImgPopupHandler(pictureProfileCard.alt, pictureProfileCard.src));
+    // return this._element;
   }
-
 }
+
+// Переработка начальных карточек
+initialCards.forEach((cardData) => {
+  const card = new Card(cardData.name, cardData.link);
+  const cardElement = card.generateCard();
+  cardContainer.prepend(cardElement);
+});
