@@ -32,19 +32,25 @@ class Card {
     this._templateSelector = templateSelector;
   }
 
-  // Функция создать карточку
-  generateProfileCard (cardData) {
-  const newProfileCard = profileCardTemplate.cloneNode(true);
-  const titleProfileCard = newProfileCard.querySelector('.card__name');
-  titleProfileCard.textContent = _name;
-  const pictureProfileCard = newProfileCard.querySelector('.card__img');
-  pictureProfileCard.src = _link;
-  pictureProfileCard.alt = _name;
-  const deleteProfileCard = newProfileCard.querySelector('.card__delete-button');
-  deleteProfileCard.addEventListener('click', deleteProfileCardHandler);
-  const likeProfileCard = newProfileCard.querySelector('.card__like-button');
-  likeProfileCard.addEventListener('click', likeProfileCardHandler);
-  pictureProfileCard.addEventListener('click', () => openImgPopupHandler(pictureProfileCard.alt, pictureProfileCard.src));
-  return newProfileCard;
+  _getTemplate() {
+    const cardElement = document
+    .querySelector('#card-template')
+    .textContent
+    .querySelector('.card')
+    .cloneNode(true);
+    return cardElement;
   }
+
+  generateCard() {
+    this.element = this._getTemplate();
+    this._element.querySelector('.card__img').src = this._link;
+    this._element.querySelector('.card__img').alt = this._name;
+    this._element.querySelector('.card__name').textContent = this._name;
+    this._element.querySelector('.card__delete-button').addEventListener('click', deleteProfileCardHandler);
+    this._element.querySelector('.card__like-button').addEventListener('click', likeProfileCardHandler);
+    const pictureProfileCard = this._element.querySelector('.card__img');
+    pictureProfileCard.addEventListener('click', () => openImgPopupHandler(pictureProfileCard.alt, pictureProfileCard.src));
+    return this._element;
+  }
+
 }
