@@ -98,8 +98,6 @@ function activationValidation(popupData, formElement) {
 function openProfilePopupHandler() {
   popupProfileName.value = profileName.textContent;
   popupProfilePlace.value = profileJob.textContent;
-  // hideInputError(profilePopupForm, popupProfileName, popupData);
-  // hideInputError(profilePopupForm, popupProfilePlace, popupData);
   openPopup(profilePopup);
 }
 function submitProfilePopupHandler(evt) {
@@ -115,9 +113,6 @@ function submitCardPopupHandler(evt) {
 }
 function openCardPopupHandler() {
   cardPopupForm.reset();
-  // hideInputError(cardPopupForm, popupCardName, popupData);
-  // hideInputError(cardPopupForm, popupCardPlace, popupData);
-  // toggleButtonState(cardPopupInputsArray, cardPopupSubmit, popupData);
   openPopup(cardPopup);
 }
 
