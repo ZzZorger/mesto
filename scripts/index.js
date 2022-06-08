@@ -83,21 +83,17 @@ function closeByEscape(evt) {
 
 // Обработка карточек классом Card
 function renderAddCard(item) {
-  const card = new Card(item.name, item.link);
-	const cardElment = card.generateCard();
+	const cardElment = new Card(item.name, item.link).generateCard();
   cardContainer.prepend(cardElment);
 }
 initialCards.forEach((item) => {
   renderAddCard(item);
 });
 
+// Функция активации валидации
 function activationValidation(popupData, formElement) {
-  const validation = new FormValidator(popupData, formElement);
-  const activation = validation.enableValidation();
+  new FormValidator(popupData, formElement).enableValidation();
 }
-
-activationValidation(popupData, profilePopupForm);
-activationValidation(popupData, cardPopupForm);
 
 function openProfilePopupHandler() {
   popupProfileName.value = profileName.textContent;
@@ -130,6 +126,8 @@ popupProfileEditButton.addEventListener('click', openProfilePopupHandler);
 profilePopupForm.addEventListener('submit', submitProfilePopupHandler);
 popupAddCardButton.addEventListener('click', openCardPopupHandler);
 cardPopupForm.addEventListener('submit', submitCardPopupHandler);
+activationValidation(popupData, profilePopupForm);
+activationValidation(popupData, cardPopupForm);
 
 export {
   openPopup,
