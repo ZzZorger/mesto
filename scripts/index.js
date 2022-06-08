@@ -1,4 +1,5 @@
 import Card from "./Card.js";
+import FormValidator from "./FormValidator.js";
 
 const popups = document.querySelectorAll('.popup');
 const popupProfileEditButton = document.querySelector('.profile__edit-button');
@@ -43,6 +44,14 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
+const popupData = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__save-button',
+  inactiveButtonClass: 'popup__save-button_type_inactive',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_type_active'
+};
 
 // Функция открытия попапов
 function openPopup(popupName) {
@@ -82,6 +91,14 @@ initialCards.forEach((item) => {
   renderAddCard(item);
 });
 
+function activationValidation(popupData, formElement) {
+  const validation = new FormValidator(popupData, formElement);
+  const activation = validation.enableValidation();
+}
+
+activationValidation(popupData, profilePopupForm);
+activationValidation(popupData, cardPopupForm);
+
 function openProfilePopupHandler() {
   popupProfileName.value = profileName.textContent;
   popupProfilePlace.value = profileJob.textContent;
@@ -120,4 +137,5 @@ export {
   imgPopup,
   imgPopupSrc,
   imgPopupTitle,
+  popupData,
 };
