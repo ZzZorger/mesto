@@ -18,6 +18,7 @@ const imgPopupSrc = imgPopup.querySelector('.img-popup__img');
 const imgPopupTitle = imgPopup.querySelector('.img-popup__title');
 const popupCardName = cardPopup.querySelector('.popup__input_type_name');
 const popupCardPlace = cardPopup.querySelector('.popup__input_type_place');
+const popupCardSubmitButton = cardPopup.querySelector('.popup__save-button');
 const initialCards = [
   {
     name: 'Архыз',
@@ -65,14 +66,11 @@ function closePopup(popupName) {
   document.removeEventListener('keydown', closeByEscape);
 }
 popups.forEach((popup) => {
-    popup.addEventListener('mousedown', (evt) => {
-        if (evt.target.classList.contains('popup_is-opened')) {
-            closePopup(popup)
-        }
-        if (evt.target.classList.contains('close-button')) {
-          closePopup(popup)
-        }
-    })
+  popup.addEventListener('mousedown', (evt) => {
+    if (evt.target.classList.contains('popup_is-opened') || evt.target.classList.contains('close-button')) {
+      closePopup(popup);
+    }
+  });
 })
 function closeByEscape(evt) {
   if (evt.key === 'Escape') {
@@ -83,7 +81,7 @@ function closeByEscape(evt) {
 
 // Обработка карточек классом Card
 function renderAddCard(item) {
-	const cardElment = new Card(item.name, item.link).generateCard();
+  const cardElment = new Card(item.name, item.link, '#card-template').generateCard();
   cardContainer.prepend(cardElment);
 }
 initialCards.forEach((item) => {
@@ -111,8 +109,13 @@ function submitCardPopupHandler(evt) {
   renderAddCard({ name: popupCardName.value, link: popupCardPlace.value });
   closePopup(cardPopup);
 }
-function openCardPopupHandler() {
+function openCardPopupReset() {
   cardPopupForm.reset();
+  popupCardSubmitButton.classList.add(popupData.inactiveButtonClass);
+  popupCardSubmitButton.disabled = true;
+}
+function openCardPopupHandler() {
+  openCardPopupReset();
   openPopup(cardPopup);
 }
 

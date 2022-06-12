@@ -7,14 +7,15 @@ import {
 from '../scripts/index.js';
 
 class Card {
-  constructor(name, link) {
+  constructor(name, link, cardSelector) {
     this._name = name;
     this._link = link;
+    this._cardSelector = cardSelector;
   }
 
   _getTemplate() {
     const cardElment = document
-    .querySelector('#card-template')
+    .querySelector(this._cardSelector)
     .content
     .querySelector('.card')
     .cloneNode(true);
@@ -36,15 +37,19 @@ class Card {
     openPopup(imgPopup);
   }
 
+  _setEventListeners() {
+    this._element.querySelector('.card__delete-button').addEventListener('click', () => this._deleteProfileCardHandler());
+    this._element.querySelector('.card__like-button').addEventListener('click', () => this._likeProfileCardHandler());
+    const _pictureProfileCard = this._element.querySelector('.card__img');
+    _pictureProfileCard.addEventListener('click', () => this._openImgPopupHandler(_pictureProfileCard.alt, _pictureProfileCard.src));
+  }
+
   generateCard() {
     this._element = this._getTemplate();
     this._element.querySelector('.card__img').src = this._link;
     this._element.querySelector('.card__img').alt = this._name;
     this._element.querySelector('.card__name').textContent = this._name;
-    this._element.querySelector('.card__delete-button').addEventListener('click', () => this._deleteProfileCardHandler());
-    this._element.querySelector('.card__like-button').addEventListener('click', () => this._likeProfileCardHandler());
-    const _pictureProfileCard = this._element.querySelector('.card__img');
-    _pictureProfileCard.addEventListener('click', () => this._openImgPopupHandler(_pictureProfileCard.alt, _pictureProfileCard.src));
+    this._setEventListeners();
     return this._element;
   }
 }
