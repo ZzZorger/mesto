@@ -119,7 +119,6 @@ function openCardPopupHandler() {
   openPopup(cardPopup);
 }
 
-
 popupProfileEditButton.addEventListener('click', openProfilePopupHandler);
 profilePopupForm.addEventListener('submit', submitProfilePopupHandler);
 popupAddCardButton.addEventListener('click', openCardPopupHandler);
