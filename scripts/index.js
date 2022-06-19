@@ -1,5 +1,6 @@
 import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
+import Section from "./Section.js";
 
 const popups = document.querySelectorAll('.popup');
 const popupProfileEditButton = document.querySelector('.profile__edit-button');
@@ -7,6 +8,8 @@ const popupAddCardButton = document.querySelector('.profile__add-button');
 const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__job');
 const cardContainer = document.querySelector('.elements');
+const classNameElements = '.elements';
+const templateId = '#card-template';
 const imgPopup = document.querySelector('.img-popup');
 const profilePopup = document.querySelector('.popup-profile');
 const cardPopup = document.querySelector('.popup-card');
@@ -80,13 +83,27 @@ function closeByEscape(evt) {
 }
 
 // Обработка карточек классом Card
-function renderAddCard(item) {
-  const cardElment = new Card(item.name, item.link, '#card-template').generateCard();
-  cardContainer.prepend(cardElment);
-}
-initialCards.forEach((item) => {
-  renderAddCard(item);
-});
+// function renderAddCard(item) {
+//   const cardElment = new Card(item.name, item.link, '#card-template').generateCard();
+//   cardContainer.prepend(cardElment);
+// }
+// initialCards.forEach((item) => {
+//   renderAddCard(item);
+// });
+
+const defaultCardList = new Section({
+  items: initialCards,
+  renderer: (item) => {
+    const card = new Card(item.name, item.link, templateId).generateCard();
+    defaultCardList.addItem(card);
+  }
+}, classNameElements);
+defaultCardList.renderItems();
+
+
+// renderAddCard(initialCards, '.elements');
+// popupProfileEditButton.addEventListener('click', openProfilePopupHandler);
+// defaultCardList.addItem();
 
 // Функция активации валидации
 function activationValidation(popupData, formElement) {
