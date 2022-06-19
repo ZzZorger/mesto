@@ -11,10 +11,11 @@ import {
 from '../index.js';
 
 export default class Card {
-  constructor(name, link, cardSelector) {
+  constructor(name, link, cardSelector, handleCardClick) {
     this._name = name;
     this._link = link;
     this._cardSelector = cardSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -46,6 +47,7 @@ export default class Card {
     this._element.querySelector('.card__like-button').addEventListener('click', () => this._likeProfileCardHandler());
     const _pictureProfileCard = this._element.querySelector('.card__img');
     _pictureProfileCard.addEventListener('click', () => this._openImgPopupHandler(_pictureProfileCard.alt, _pictureProfileCard.src));
+    // _pictureProfileCard.addEventListener('click', () => this._handleCardClick(_pictureProfileCard.alt, _pictureProfileCard.src));
   }
 
   generateCard() {
