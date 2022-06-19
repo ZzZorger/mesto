@@ -1,6 +1,7 @@
 import Card from './components/Card.js';
 import FormValidator from './components/FormValidator.js';
 import Section from './components/Section.js';
+import Popup from './components/Popup.js';
 import {
   popups,
   initialCards,
@@ -19,7 +20,8 @@ import {
   popupProfilePlace,
   profileJob,
   popupCardName,
-  popupCardPlace
+  popupCardPlace,
+  profilePopupClass
 }
 from "./utils/constants.js";
 
@@ -47,6 +49,7 @@ function closeByEscape(evt) {
     closePopup(openedPopup);
   }
 }
+// const openPopupClass = new Popup(profilePopupClass);
 
 // Обработка карточек классом Card и добавление в разметку классом Section
 const defaultCardList = new Section({
@@ -90,6 +93,7 @@ function openCardPopupHandler() {
 }
 
 popupProfileEditButton.addEventListener('click', openProfilePopupHandler);
+// popupProfileEditButton.addEventListener('click', new Popup(profilePopupClass).openPopup());
 profilePopupForm.addEventListener('submit', submitProfilePopupHandler);
 popupAddCardButton.addEventListener('click', openCardPopupHandler);
 cardPopupForm.addEventListener('submit', submitCardPopupHandler);

@@ -14,6 +14,7 @@ export const popupProfilePlace = profilePopup.querySelector('.popup__input_type_
 export const profileJob = document.querySelector('.profile__job');
 export const popupCardName = cardPopup.querySelector('.popup__input_type_name');
 export const popupCardPlace = cardPopup.querySelector('.popup__input_type_place');
+export const profilePopupClass = '.popup-profile';
 
 // export const cardContainer = document.querySelector('.elements');
 export const imgPopup = document.querySelector('.img-popup');
