@@ -1,4 +1,4 @@
-class FormValidator {
+export default class FormValidator {
   constructor(popupData, formElement) {
     this._formSelector = popupData.formSelector;
     this._inputSelector = popupData.inputSelector;
@@ -61,5 +61,3 @@ class FormValidator {
     });
   };
 }
-
-export default FormValidator;

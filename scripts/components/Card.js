@@ -1,12 +1,16 @@
-import {
-  openPopup, 
+import { 
   imgPopup, 
   imgPopupTitle, 
   imgPopupSrc
 } 
-from '../scripts/index.js';
+from '../utils/constants.js';
 
-class Card {
+import {
+  openPopup
+}
+from '../index.js';
+
+export default class Card {
   constructor(name, link, cardSelector) {
     this._name = name;
     this._link = link;
@@ -53,5 +57,3 @@ class Card {
     return this._element;
   }
 }
-
-export default Card;
