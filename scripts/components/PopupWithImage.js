@@ -1,9 +1,9 @@
 import Popup from "./Popup.js";
-import {  
-  imgPopupTitle, 
+import {
+  imgPopupTitle,
   imgPopupSrc
-} 
-from '../utils/constants.js';
+}
+  from '../utils/constants.js';
 
 export default class PopupWithImage extends Popup {
   openPopup(cardTitle, cardImage) {

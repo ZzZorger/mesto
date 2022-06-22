@@ -23,6 +23,7 @@ import {
 }
 from "./utils/constants.js";
 import PopupWithImage from './components/PopupWithImage.js';
+import PopupWithForm from './components/PopupWithForm.js';
 
 // Обработка карточек классом Card и добавление в разметку классом Section
 const defaultCardList = new Section({
@@ -72,7 +73,8 @@ function openCardPopupHandler() {
 // img.addEventListener('click',  () => new PopupWithImage('.img-popup').openPopup(img.alt, img.src))
 
 popupProfileEditButton.addEventListener('click', openProfilePopupHandler);
-profilePopupForm.addEventListener('submit', submitProfilePopupHandler);
+// profilePopupForm.addEventListener('submit', submitProfilePopupHandler);
+profilePopupForm.addEventListener('submit', () => new PopupWithForm('.popup-profile', '.popup-profile').setEventListeners());
 popupAddCardButton.addEventListener('click', openCardPopupHandler);
 cardPopupForm.addEventListener('submit', submitCardPopupHandler);
 
