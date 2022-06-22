@@ -1,15 +1,9 @@
 import { 
-  imgPopup, 
-  imgPopupTitle, 
-  imgPopupSrc
+  cardImgPopupClass
 } 
 from '../utils/constants.js';
-
-// import {
-//   openPopup
-// }
-// from '../index.js';
-
+import Popup from './Popup.js';
+import PopupWithImage from './PopupWithImage.js';
 
 export default class Card {
   constructor(name, link, cardSelector, handleCardClick) {
@@ -36,19 +30,12 @@ export default class Card {
     this._element.querySelector('.card__like-button').classList.toggle('card__like-button_active');
   }
 
-  // _openImgPopupHandler (cardTitle, cardImage) {
-  //   imgPopupTitle.textContent = cardTitle;
-  //   imgPopupSrc.alt = cardTitle;
-  //   imgPopupSrc.src = cardImage;
-  //   openPopup(imgPopup);
-  // }
-
   _setEventListeners() {
     this._element.querySelector('.card__delete-button').addEventListener('click', () => this._deleteProfileCardHandler());
     this._element.querySelector('.card__like-button').addEventListener('click', () => this._likeProfileCardHandler());
-    const _pictureProfileCard = this._element.querySelector('.card__img');
-    _pictureProfileCard.addEventListener('click', () => this._openImgPopupHandler(_pictureProfileCard.alt, _pictureProfileCard.src));
-    // _pictureProfileCard.addEventListener('click', () => this._handleCardClick(_pictureProfileCard.alt, _pictureProfileCard.src));
+    const _pictureProfileCard = this._element.querySelector(cardImgPopupClass);
+    _pictureProfileCard.addEventListener('click', () => new PopupWithImage('.img-popup').openPopup(_pictureProfileCard.alt, _pictureProfileCard.src));
+    _pictureProfileCard.addEventListener('click', () => new Popup('.img-popup').setEventListeners());
   }
 
   generateCard() {
