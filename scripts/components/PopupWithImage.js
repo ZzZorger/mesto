@@ -6,17 +6,13 @@ import {
 from '../utils/constants.js';
 
 export default class PopupWithImage extends Popup {
-  constructor(data, popupSelector) {
+  constructor(popupSelector) {
     super(popupSelector);
-
-    this._text = data.text;
-    this._image = data.image;
   }
-  openPopup() {
-    imgPopupTitle.textContent = this._text;
-    imgPopupSrc.alt = this._text;
-    imgPopupSrc.src = this._image;
-    this._popupSelector.classList.add('popup_is-opened');
-    document.addEventListener('keydown', this._closeByEscape);
+  openPopup(cardTitle, cardImage) {
+    imgPopupTitle.textContent = cardTitle;
+    imgPopupSrc.alt = cardTitle;
+    imgPopupSrc.src = cardImage;
+    super.openPopup();
   }
 }

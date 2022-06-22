@@ -1,4 +1,4 @@
-export const popups = document.querySelectorAll('.popup');
+// export const popups = document.querySelectorAll('.popup');
 export const classNameElements = '.elements';
 export const templateId = '#card-template';
 export const profilePopup = document.querySelector('.popup-profile');
@@ -15,6 +15,7 @@ export const profileJob = document.querySelector('.profile__job');
 export const popupCardName = cardPopup.querySelector('.popup__input_type_name');
 export const popupCardPlace = cardPopup.querySelector('.popup__input_type_place');
 export const profilePopupClass = '.popup-profile';
+export const cardPopupClass = '.popup-card';
 
 // export const cardContainer = document.querySelector('.elements');
 export const imgPopup = document.querySelector('.img-popup');

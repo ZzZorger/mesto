@@ -5,10 +5,11 @@ import {
 } 
 from '../utils/constants.js';
 
-import {
-  openPopup
-}
-from '../index.js';
+// import {
+//   openPopup
+// }
+// from '../index.js';
+
 
 export default class Card {
   constructor(name, link, cardSelector, handleCardClick) {
@@ -35,12 +36,12 @@ export default class Card {
     this._element.querySelector('.card__like-button').classList.toggle('card__like-button_active');
   }
 
-  _openImgPopupHandler (cardTitle, cardImage) {
-    imgPopupTitle.textContent = cardTitle;
-    imgPopupSrc.alt = cardTitle;
-    imgPopupSrc.src = cardImage;
-    openPopup(imgPopup);
-  }
+  // _openImgPopupHandler (cardTitle, cardImage) {
+  //   imgPopupTitle.textContent = cardTitle;
+  //   imgPopupSrc.alt = cardTitle;
+  //   imgPopupSrc.src = cardImage;
+  //   openPopup(imgPopup);
+  // }
 
   _setEventListeners() {
     this._element.querySelector('.card__delete-button').addEventListener('click', () => this._deleteProfileCardHandler());
