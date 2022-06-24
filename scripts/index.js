@@ -4,6 +4,7 @@ import Section from './components/Section.js';
 import Popup from './components/Popup.js';
 // import PopupWithImage from './components/PopupWithImage.js';
 import PopupWithForm from './components/PopupWithForm.js';
+import UserInfo from './components/UserInfo.js';
 import {
   initialCards,
   classNameElements,
@@ -25,6 +26,7 @@ import {
 }
 from "./utils/constants.js";
 
+
 // Обработка карточек классом Card и добавление в разметку классом Section
 const defaultCardList = new Section({
   items: initialCards,
@@ -41,8 +43,9 @@ function activationValidation(popupData, formElement) {
 }
 
 function openProfilePopupHandler() {
-  popupProfileName.value = profileName.textContent;
-  popupProfilePlace.value = profileJob.textContent;
+  const userInfo = new UserInfo(profileName, profileJob);
+  popupProfileName.value = userInfo.getUserData().userName;
+  popupProfilePlace.value = userInfo.getUserData().userInfo;
   const newProfilePopup = new Popup(profilePopupClass);
   newProfilePopup.setEventListeners();
   newProfilePopup.openPopup();
@@ -52,8 +55,7 @@ function openProfilePopupHandler() {
 const profileForm = new PopupWithForm({
   popupSelector: profilePopupClass,
   submitFormHandler: (input) => {
-    profileName.textContent = input['profile-name'];
-    profileJob.textContent = input['profile-about'];
+    userInfo.setUserData(input['profile-name'], input['profile-about'])
   }
 })
 const cardForm = new PopupWithForm({
@@ -75,7 +77,6 @@ function openCardPopupHandler() {
   newCardPopup.setEventListeners();
   newCardPopup.openPopup()
 }
-
 
 profileForm.setEventListeners();
 cardForm.setEventListeners();
