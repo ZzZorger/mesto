@@ -43,26 +43,27 @@ function activationValidation(popupData, formElement) {
 function openProfilePopupHandler() {
   popupProfileName.value = profileName.textContent;
   popupProfilePlace.value = profileJob.textContent;
-  new Popup(profilePopupClass).setEventListeners();
-  new Popup(profilePopupClass).openPopup();
+  const newProfilePopup = new Popup(profilePopupClass);
+  newProfilePopup.setEventListeners();
+  newProfilePopup.openPopup();
 }
 
-// Включение функционала сабмита формы
-const Profileform = new PopupWithForm({
+// Cабмит форм
+const profileForm = new PopupWithForm({
   popupSelector: profilePopupClass,
   submitFormHandler: (input) => {
     profileName.textContent = input['profile-name'];
     profileJob.textContent = input['profile-about'];
   }
 })
-Profileform.setEventListeners();
+const cardForm = new PopupWithForm({
+  popupSelector: cardPopupClass,
+  submitFormHandler: (input) => {
+    const card = new Card(input['card-name'], input['card-url'], templateId).generateCard();
+    defaultCardList.addItem(card);
+  }
+})
 
-
-function submitCardPopupHandler(evt) {
-  evt.preventDefault();
-  defaultCardList.addItem(new Card(popupCardName.value, popupCardPlace.value, templateId).generateCard());
-  new Popup(cardPopupClass).closePopup()
-}
 function openCardPopupReset() {
   cardPopupForm.reset();
   popupCardSubmitButton.classList.add(popupData.inactiveButtonClass);
@@ -70,14 +71,15 @@ function openCardPopupReset() {
 }
 function openCardPopupHandler() {
   openCardPopupReset();
-  new Popup(cardPopupClass).setEventListeners();
-  new Popup(cardPopupClass).openPopup()
+  const newCardPopup = new Popup(cardPopupClass);
+  newCardPopup.setEventListeners();
+  newCardPopup.openPopup()
 }
 
 
+profileForm.setEventListeners();
+cardForm.setEventListeners();
 popupProfileEditButton.addEventListener('click', openProfilePopupHandler);
 popupAddCardButton.addEventListener('click', openCardPopupHandler);
-cardPopupForm.addEventListener('submit', submitCardPopupHandler);
-
 activationValidation(popupData, profilePopupForm);
 activationValidation(popupData, cardPopupForm);
