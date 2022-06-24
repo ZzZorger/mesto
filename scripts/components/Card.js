@@ -1,10 +1,3 @@
-import { 
-  cardImgPopupClass
-} 
-from '../utils/constants.js';
-import Popup from './Popup.js';
-import PopupWithImage from './PopupWithImage.js';
-
 export default class Card {
   constructor(name, link, cardSelector, handleCardClick) {
     this._name = name;
@@ -23,26 +16,29 @@ export default class Card {
   }
 
   _deleteProfileCardHandler () {
-    this._element.querySelector('.card__delete-button').parentNode.remove();
+    this._cardDelete.parentNode.remove();
   }
 
   _likeProfileCardHandler () {
-    this._element.querySelector('.card__like-button').classList.toggle('card__like-button_active');
+    this._cardLike.classList.toggle('card__like-button_active');
   }
 
   _setEventListeners() {
-    this._element.querySelector('.card__delete-button').addEventListener('click', () => this._deleteProfileCardHandler());
-    this._element.querySelector('.card__like-button').addEventListener('click', () => this._likeProfileCardHandler());
-    const _pictureProfileCard = this._element.querySelector(cardImgPopupClass);
-    _pictureProfileCard.addEventListener('click', () => new PopupWithImage('.img-popup').openPopup(_pictureProfileCard.alt, _pictureProfileCard.src));
-    _pictureProfileCard.addEventListener('click', () => new Popup('.img-popup').setEventListeners());
+    this._cardDelete.addEventListener('click', () => this._deleteProfileCardHandler());
+    this._cardLike.addEventListener('click', () => this._likeProfileCardHandler());
+    this._cardImg.addEventListener('click', () => this._handleCardClick(this._name, this._link))
   }
 
   generateCard() {
     this._element = this._getTemplate();
-    this._element.querySelector('.card__img').src = this._link;
-    this._element.querySelector('.card__img').alt = this._name;
-    this._element.querySelector('.card__name').textContent = this._name;
+    this._cardImg = this._element.querySelector('.card__img');
+    this._cardName = this._element.querySelector('.card__name');
+    this._cardDelete = this._element.querySelector('.card__delete-button');
+    this._cardLike = this._element.querySelector('.card__like-button');
+
+    this._cardImg.src = this._link;
+    this._cardImg.alt = this._name;
+    this._cardName.textContent = this._name;
     this._setEventListeners();
     return this._element;
   }

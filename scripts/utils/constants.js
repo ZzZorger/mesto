@@ -1,4 +1,3 @@
-// export const popups = document.querySelectorAll('.popup');
 export const classNameElements = '.elements';
 export const templateId = '#card-template';
 export const profilePopup = document.querySelector('.popup-profile');
@@ -17,8 +16,6 @@ export const popupCardPlace = cardPopup.querySelector('.popup__input_type_place'
 export const profilePopupClass = '.popup-profile';
 export const cardPopupClass = '.popup-card';
 export const cardImgPopupClass = '.card__img';
-
-// export const cardContainer = document.querySelector('.elements');
 export const imgPopup = document.querySelector('.img-popup');
 export const imgPopupSrc = imgPopup.querySelector('.img-popup__img');
 export const imgPopupTitle = imgPopup.querySelector('.img-popup__title');

@@ -4,6 +4,7 @@ import Section from './components/Section.js';
 import Popup from './components/Popup.js';
 import PopupWithForm from './components/PopupWithForm.js';
 import UserInfo from './components/UserInfo.js';
+import PopupWithImage from './components/PopupWithImage.js';
 import {
   initialCards,
   classNameElements,
@@ -23,18 +24,24 @@ import {
 }
 from "./utils/constants.js";
 
+
 const userInfo = new UserInfo(profileName, profileJob);
 const newProfilePopup = new Popup(profilePopupClass);
+const popupWithImage = new PopupWithImage('.img-popup');
+
+function handleCardClick(name, link) {
+  popupWithImage.openPopup(name, link)
+}
 
 // Обработка карточек классом Card и добавление в разметку классом Section
 const defaultCardList = new Section({
   items: initialCards,
   renderer: (item) => {
-    const card = new Card(item.name, item.link, templateId).generateCard();
+    const card = new Card(item.name, item.link, templateId, handleCardClick).generateCard();
     defaultCardList.addItem(card);
   }
 }, classNameElements);
-defaultCardList.renderItems();
+
 
 // Функция активации валидации
 function activationValidation(popupData, formElement) {
@@ -58,7 +65,7 @@ const profileForm = new PopupWithForm({
 const cardForm = new PopupWithForm({
   popupSelector: cardPopupClass,
   submitFormHandler: (input) => {
-    const card = new Card(input['card-name'], input['card-url'], templateId).generateCard();
+    const card = new Card(input['card-name'], input['card-url'], templateId, handleCardClick).generateCard();
     defaultCardList.addItem(card);
   }
 })
@@ -75,9 +82,12 @@ function openCardPopupHandler() {
   newCardPopup.openPopup()
 }
 
+popupWithImage.setEventListeners();
+defaultCardList.renderItems();
 profileForm.setEventListeners();
 cardForm.setEventListeners();
 popupProfileEditButton.addEventListener('click', openProfilePopupHandler);
 popupAddCardButton.addEventListener('click', openCardPopupHandler);
 activationValidation(popupData, profilePopupForm);
 activationValidation(popupData, cardPopupForm);
+debugger
