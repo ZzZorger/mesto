@@ -23,6 +23,8 @@ import {
 }
 from "./utils/constants.js";
 
+const userInfo = new UserInfo(profileName, profileJob);
+const newProfilePopup = new Popup(profilePopupClass);
 
 // Обработка карточек классом Card и добавление в разметку классом Section
 const defaultCardList = new Section({
@@ -40,10 +42,8 @@ function activationValidation(popupData, formElement) {
 }
 
 function openProfilePopupHandler() {
-  const userInfo = new UserInfo(profileName, profileJob);
   popupProfileName.value = userInfo.getUserData().userName;
   popupProfilePlace.value = userInfo.getUserData().userInfo;
-  const newProfilePopup = new Popup(profilePopupClass);
   newProfilePopup.setEventListeners();
   newProfilePopup.openPopup();
 }
