@@ -2,6 +2,8 @@ import Card from './components/Card.js';
 import FormValidator from './components/FormValidator.js';
 import Section from './components/Section.js';
 import Popup from './components/Popup.js';
+// import PopupWithImage from './components/PopupWithImage.js';
+import PopupWithForm from './components/PopupWithForm.js';
 import {
   initialCards,
   classNameElements,
@@ -22,8 +24,6 @@ import {
   cardPopupClass
 }
 from "./utils/constants.js";
-import PopupWithImage from './components/PopupWithImage.js';
-import PopupWithForm from './components/PopupWithForm.js';
 
 // Обработка карточек классом Card и добавление в разметку классом Section
 const defaultCardList = new Section({
@@ -46,12 +46,18 @@ function openProfilePopupHandler() {
   new Popup(profilePopupClass).setEventListeners();
   new Popup(profilePopupClass).openPopup();
 }
-function submitProfilePopupHandler(evt) {
-  evt.preventDefault();
-  profileName.textContent = popupProfileName.value;
-  profileJob.textContent = popupProfilePlace.value;
-  new Popup(profilePopupClass).closePopup()
-}
+
+// Включение функционала сабмита формы
+const Profileform = new PopupWithForm({
+  popupSelector: profilePopupClass,
+  submitFormHandler: (input) => {
+    profileName.textContent = input['profile-name'];
+    profileJob.textContent = input['profile-about'];
+  }
+})
+Profileform.setEventListeners();
+
+
 function submitCardPopupHandler(evt) {
   evt.preventDefault();
   defaultCardList.addItem(new Card(popupCardName.value, popupCardPlace.value, templateId).generateCard());
@@ -68,13 +74,8 @@ function openCardPopupHandler() {
   new Popup(cardPopupClass).openPopup()
 }
 
-// const img = document.querySelector('.card__img')
-// console.log(img)
-// img.addEventListener('click',  () => new PopupWithImage('.img-popup').openPopup(img.alt, img.src))
 
 popupProfileEditButton.addEventListener('click', openProfilePopupHandler);
-// profilePopupForm.addEventListener('submit', submitProfilePopupHandler);
-profilePopupForm.addEventListener('submit', () => new PopupWithForm('.popup-profile', '.popup-profile').setEventListeners());
 popupAddCardButton.addEventListener('click', openCardPopupHandler);
 cardPopupForm.addEventListener('submit', submitCardPopupHandler);
 
