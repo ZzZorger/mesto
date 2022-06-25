@@ -6,12 +6,12 @@ export default class UserInfo {
 
   getUserData() {
     this._formValues = {
-      userName: this._nameSelector.textContent, 
+      userName: this._nameSelector.textContent,
       userInfo: this._infoSelector.textContent
     }
     return this._formValues;
   }
-  setUserData(userName, userInfo) { 
+  setUserData(userName, userInfo) {
     this._nameSelector.textContent = userName;
     this._infoSelector.textContent = userInfo;
   }

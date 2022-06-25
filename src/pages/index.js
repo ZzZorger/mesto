@@ -22,7 +22,7 @@ import {
   profilePopupClass,
   cardPopupClass
 }
-from "../utils/constants.js";
+  from "../utils/constants.js";
 
 // Объявление классов
 //

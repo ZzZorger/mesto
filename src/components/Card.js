@@ -8,18 +8,18 @@ export default class Card {
 
   _getTemplate() {
     const cardElment = document
-    .querySelector(this._cardSelector)
-    .content
-    .querySelector('.card')
-    .cloneNode(true);
+      .querySelector(this._cardSelector)
+      .content
+      .querySelector('.card')
+      .cloneNode(true);
     return cardElment;
   }
 
-  _deleteProfileCardHandler () {
+  _deleteProfileCardHandler() {
     this._cardDelete.parentNode.remove();
   }
 
-  _likeProfileCardHandler () {
+  _likeProfileCardHandler() {
     this._cardLike.classList.toggle('card__like-button_active');
   }
 

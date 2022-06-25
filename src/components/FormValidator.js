@@ -8,25 +8,25 @@ export default class FormValidator {
     this._errorClass = popupData.errorClass;
     this._formElement = formElement;
   }
-  
-  _hideInputError (_inputElement) {
+
+  _hideInputError(_inputElement) {
     const _errorElement = this._formElement.querySelector(`.${_inputElement.id}-error`);
     _inputElement.classList.remove(this._inputErrorClass);
     _errorElement.classList.remove(this._errorClass);
     _errorElement.textContent = '';
   };
-  _showInputError (_inputElement, _errorMessage) {
+  _showInputError(_inputElement, _errorMessage) {
     const _errorElement = this._formElement.querySelector(`.${_inputElement.id}-error`);
     _inputElement.classList.add(this._inputErrorClass);
     _errorElement.textContent = _errorMessage;
     _errorElement.classList.add(this._errorClass);
   };
-  _hasInvalidInput (_inputList) {
+  _hasInvalidInput(_inputList) {
     return _inputList.some((_inputElement) => {
       return !_inputElement.validity.valid;
     })
   };
-  _toggleButtonState (_inputList, _buttonElement) {
+  _toggleButtonState(_inputList, _buttonElement) {
     if (this._hasInvalidInput(_inputList)) {
       _buttonElement.classList.add(this._inactiveButtonClass);
       _buttonElement.disabled = true;
@@ -35,14 +35,14 @@ export default class FormValidator {
       _buttonElement.disabled = false;
     }
   };
-  _isValid (_inputElement) {
+  _isValid(_inputElement) {
     if (!_inputElement.validity.valid) {
       this._showInputError(_inputElement, _inputElement.validationMessage);
     } else {
       this._hideInputError(_inputElement);
     }
   };
-  _setEventListeners () {
+  _setEventListeners() {
     const _inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
     const _buttonElement = this._formElement.querySelector(this._submitButtonSelector);
     _inputList.forEach((_inputElement) => {
@@ -57,7 +57,7 @@ export default class FormValidator {
     this._setEventListeners();
     const formList = Array.from(document.querySelectorAll(this._formSelector));
     formList.forEach((_formElement) => {
-          _formElement.addEventListener('submit', () => this._setEventListeners());
+      _formElement.addEventListener('submit', () => this._setEventListeners());
     });
   };
 }
