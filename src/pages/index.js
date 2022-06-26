@@ -1,7 +1,6 @@
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
-import Popup from '../components/Popup.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 import PopupWithImage from '../components/PopupWithImage.js';
@@ -16,9 +15,7 @@ import {
   popupData,
   popupCardSubmitButton,
   popupProfileName,
-  profileName,
   popupProfilePlace,
-  profileJob,
   profilePopupClass,
   cardPopupClass
 }
@@ -26,62 +23,55 @@ import {
 
 // Объявление классов
 //
-const userInfo = new UserInfo(profileName, profileJob);
-const newProfilePopup = new Popup(profilePopupClass);
+const userInfo = new UserInfo({ name: '.profile__name', info: '.profile__job' });
 const popupWithImage = new PopupWithImage('.img-popup');
 const profileForm = new PopupWithForm({
   popupSelector: profilePopupClass,
-  submitFormHandler: (input) => {
-    userInfo.setUserData(input['profile-name'], input['profile-about'])
-  }
-})
+  submitFormHandler: (input) => userInfo.setUserData(input)
+});
 const cardForm = new PopupWithForm({
   popupSelector: cardPopupClass,
-  submitFormHandler: (input) => {
-    const card = new Card(input['card-name'], input['card-url'], templateId, handleCardClick).generateCard();
-    defaultCardList.addItem(card);
-  }
-})
-
-// Объявление функций
-//
-function handleCardClick(name, link) {
-  popupWithImage.openPopup(name, link)
-}
+  submitFormHandler: (input) => createCard(input['card-name'], input['card-url'], templateId, handleCardClick)
+});
 // Обработка карточек классом Card и добавление в разметку классом Section
 const defaultCardList = new Section({
   items: initialCards,
-  renderer: (item) => {
-    const card = new Card(item.name, item.link, templateId, handleCardClick).generateCard();
-    defaultCardList.addItem(card);
-  }
+  renderer: (item) => createCard(item.name, item.link, templateId, handleCardClick)
 }, classNameElements);
 
-// Активации валидации
+// Объявление функций
+//
+// Слушатель открытия попапа с картинкой
+function handleCardClick(name, link) {
+  popupWithImage.openPopup(name, link)
+}
+// Создать карточку
+function createCard(name, link, template, handleCardClick) {
+  const card = new Card(name, link, template, handleCardClick).generateCard();
+  defaultCardList.addItem(card);
+}
+// Валидация
 function activationValidation(popupData, formElement) {
   new FormValidator(popupData, formElement).enableValidation();
 }
 // Открыть попап редактирования профиля
 function openProfilePopupHandler() {
-  popupProfileName.value = userInfo.getUserData().userName;
-  popupProfilePlace.value = userInfo.getUserData().userInfo;
-  newProfilePopup.setEventListeners();
+  const getUserData = userInfo.getUserData();
+  popupProfileName.value = getUserData.userName;
+  popupProfilePlace.value = getUserData.userInfo;
   activationValidation(popupData, profilePopupForm);
-  newProfilePopup.openPopup();
+  profileForm.openPopup();
 }
 // Настройка сброса формы попапа создания карточки
 function openCardPopupReset() {
   cardPopupForm.reset();
-  popupCardSubmitButton.classList.add(popupData.inactiveButtonClass);
-  popupCardSubmitButton.disabled = true;
+  new FormValidator(popupData, cardPopupForm).deactivButton();
 }
 // Открыть попап создания карточки
 function openCardPopupHandler() {
   openCardPopupReset();
-  const newCardPopup = new Popup(cardPopupClass);
-  newCardPopup.setEventListeners();
   activationValidation(popupData, cardPopupForm);
-  newCardPopup.openPopup()
+  cardForm.openPopup();
 }
 
 // Настройка слушателей

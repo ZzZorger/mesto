@@ -7,16 +7,15 @@ export default class Card {
   }
 
   _getTemplate() {
-    const cardElment = document
+    return document
       .querySelector(this._cardSelector)
       .content
       .querySelector('.card')
       .cloneNode(true);
-    return cardElment;
   }
 
   _deleteProfileCardHandler() {
-    this._cardDelete.parentNode.remove();
+    this._element.remove();
   }
 
   _likeProfileCardHandler() {
