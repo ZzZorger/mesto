@@ -82,4 +82,3 @@ profileForm.setEventListeners();
 cardForm.setEventListeners();
 popupProfileEditButton.addEventListener('click', openProfilePopupHandler);
 popupAddCardButton.addEventListener('click', openCardPopupHandler);
-
