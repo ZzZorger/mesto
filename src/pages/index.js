@@ -13,7 +13,6 @@ import {
   popupAddCardButton,
   cardPopupForm,
   popupData,
-  popupCardSubmitButton,
   popupProfileName,
   popupProfilePlace,
   profilePopupClass,
