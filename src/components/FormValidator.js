@@ -7,10 +7,8 @@ export default class FormValidator {
     this._inputErrorClass = popupData.inputErrorClass;
     this._errorClass = popupData.errorClass;
     this._formElement = formElement;
-
     this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
     this._buttonElement = this._formElement.querySelector(this._submitButtonSelector);
-    this._formList = Array.from(document.querySelectorAll(this._formSelector));
   }
 
   _hideInputError(_inputElement) {
@@ -60,8 +58,8 @@ export default class FormValidator {
   }
   enableValidation() {
     this._setEventListeners();
-    this._formList.forEach((_formElement) => {
-      this._formElement.addEventListener('submit', () => this._setEventListeners());
+    this._formElement.addEventListener('submit', (evt) => {
+      evt.preventDefault();
     });
   };
 }

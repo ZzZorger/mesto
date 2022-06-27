@@ -33,6 +33,9 @@ const cardForm = new PopupWithForm({
   popupSelector: cardPopupClass,
   submitFormHandler: (input) => createCard(input['card-name'], input['card-url'], templateId, handleCardClick)
 });
+const profileValidation = new FormValidator(popupData, profilePopupForm);
+const cardValidation = new FormValidator(popupData, cardPopupForm);
+
 // Обработка карточек классом Card и добавление в разметку классом Section
 const defaultCardList = new Section({
   items: initialCards,
@@ -51,26 +54,24 @@ function createCard(name, link, template, handleCardClick) {
   defaultCardList.addItem(card);
 }
 // Валидация
-function activationValidation(popupData, formElement) {
-  new FormValidator(popupData, formElement).enableValidation();
-}
+profileValidation.enableValidation();
+cardValidation.enableValidation();
+
 // Открыть попап редактирования профиля
 function openProfilePopupHandler() {
   const getUserData = userInfo.getUserData();
   popupProfileName.value = getUserData.userName;
   popupProfilePlace.value = getUserData.userInfo;
-  activationValidation(popupData, profilePopupForm);
   profileForm.openPopup();
 }
 // Настройка сброса формы попапа создания карточки
 function openCardPopupReset() {
   cardPopupForm.reset();
-  new FormValidator(popupData, cardPopupForm).deactivButton();
+  cardValidation.deactivButton();
 }
 // Открыть попап создания карточки
 function openCardPopupHandler() {
   openCardPopupReset();
-  activationValidation(popupData, cardPopupForm);
   cardForm.openPopup();
 }
 
