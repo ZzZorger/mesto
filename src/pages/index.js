@@ -63,14 +63,10 @@ function openProfilePopupHandler() {
   popupProfilePlace.value = getUserData.userInfo;
   profileForm.openPopup();
 }
-// Настройка сброса формы попапа создания карточки
-function openCardPopupReset() {
-  cardPopupForm.reset();
-  cardValidation.deactivButton();
-}
+
 // Открыть попап создания карточки
 function openCardPopupHandler() {
-  openCardPopupReset();
+  cardValidation.deactivButton();
   cardForm.openPopup();
 }
 
