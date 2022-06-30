@@ -4,6 +4,7 @@ import Section from '../components/Section.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 import PopupWithImage from '../components/PopupWithImage.js';
+import Api from '../components/Api.js';
 import {
   initialCards,
   classNameElements,
@@ -16,9 +17,13 @@ import {
   popupProfileName,
   popupProfilePlace,
   profilePopupClass,
-  cardPopupClass
+  cardPopupClass,
+  profileName,
+  profileAbout,
+  profileImg
 }
   from "../utils/constants.js";
+
 
 // Объявление классов
 //
@@ -34,12 +39,41 @@ const cardForm = new PopupWithForm({
 });
 const profileValidation = new FormValidator(popupData, profilePopupForm);
 const cardValidation = new FormValidator(popupData, cardPopupForm);
+// API
+const apiUserData = new Api({
+  baseUrl: 'https://nomoreparties.co/v1/cohort-44/users/me',
+  headers: {
+    authorization: '17e41917-a2e7-4ed8-bcef-86b0aad6a6d8'
+  }
+});
+const apiCardsData = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-44/cards',
+  headers: {
+    authorization: '17e41917-a2e7-4ed8-bcef-86b0aad6a6d8'
+  }
+});
 
-// Обработка карточек классом Card и добавление в разметку классом Section
+// API генерация карточек
+apiCardsData.getServerData()
+.then(item => {
 const defaultCardList = new Section({
-  items: initialCards,
+  items: item,
   renderer: (item) => createCard(item.name, item.link, templateId, handleCardClick)
 }, classNameElements);
+function createCard(name, link, template, handleCardClick) {
+  const card = new Card(name, link, template, handleCardClick).generateCard();
+  defaultCardList.addItem(card);
+}
+defaultCardList.renderItems();
+})
+
+
+
+// Обработка карточек классом Card и добавление в разметку классом Section
+// const defaultCardList = new Section({
+//   items: initialCards,
+//   renderer: (item) => createCard(item.name, item.link, templateId, handleCardClick)
+// }, classNameElements);
 
 // Объявление функций
 //
@@ -48,10 +82,11 @@ function handleCardClick(name, link) {
   popupWithImage.openPopup(name, link)
 }
 // Создать карточку
-function createCard(name, link, template, handleCardClick) {
-  const card = new Card(name, link, template, handleCardClick).generateCard();
-  defaultCardList.addItem(card);
-}
+// function createCard(name, link, template, handleCardClick) {
+//   const card = new Card(name, link, template, handleCardClick).generateCard();
+//   defaultCardList.addItem(card);
+//   // renderdefaultCardList.addItem(card);
+// }
 // Валидация
 profileValidation.enableValidation();
 cardValidation.enableValidation();
@@ -70,10 +105,19 @@ function openCardPopupHandler() {
   cardForm.openPopup();
 }
 
+// Установка данных с сервера
+apiUserData.getServerData()
+  .then(items => {
+    profileName.textContent = items.name;
+    profileAbout.textContent = items.about;
+    profileImg.src = items.avatar;
+  })
+
+
 // Настройка слушателей
 //
 popupWithImage.setEventListeners();
-defaultCardList.renderItems();
+// defaultCardList.renderItems();
 profileForm.setEventListeners();
 cardForm.setEventListeners();
 popupProfileEditButton.addEventListener('click', openProfilePopupHandler);

@@ -17,6 +17,9 @@ export const cardImgPopupClass = '.card__img';
 export const imgPopup = document.querySelector('.img-popup');
 export const imgPopupSrc = imgPopup.querySelector('.img-popup__img');
 export const imgPopupTitle = imgPopup.querySelector('.img-popup__title');
+export const profileName = document.querySelector('.profile__name');
+export const profileAbout = document.querySelector('.profile__job');
+export const profileImg = document.querySelector('.profile__image');
 
 export const initialCards = [
   {
