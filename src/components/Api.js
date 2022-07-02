@@ -2,7 +2,8 @@ export default class Api {
   constructor(options) {
     this._server = options.baseUrl;
     this._authorization = options.headers.authorization;
-    // console.log(this._authorization)
+    this._method = options.method;
+    this._options = options;
   }
 
   // _serverRequest() {
@@ -23,7 +24,33 @@ export default class Api {
         if (res.ok) {
           return res.json()
         }
-        return Promise.reject(res.status)
+        return Promise.reject(`Ошибка: ${res.status}`)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
+  patchServerData(profileName, profileAbout) {
+    return fetch(this._server, {
+      method: this._method,
+      headers: {
+        authorization: this._authorization,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: profileName,
+        about: profileAbout
+      })
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json()
+        }
+        return Promise.reject(`Ошибка: ${res.status}`)
+      })
+      .catch((err) => {
+        console.log(err)
       })
   }
 

@@ -6,7 +6,7 @@ import UserInfo from '../components/UserInfo.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import Api from '../components/Api.js';
 import {
-  initialCards,
+  // initialCards,
   classNameElements,
   templateId,
   popupProfileEditButton,
@@ -52,21 +52,39 @@ const apiCardsData = new Api({
     authorization: '17e41917-a2e7-4ed8-bcef-86b0aad6a6d8'
   }
 });
-
-// API генерация карточек
-apiCardsData.getServerData()
-.then(item => {
-const defaultCardList = new Section({
-  items: item,
-  renderer: (item) => createCard(item.name, item.link, templateId, handleCardClick)
-}, classNameElements);
-function createCard(name, link, template, handleCardClick) {
-  const card = new Card(name, link, template, handleCardClick).generateCard();
-  defaultCardList.addItem(card);
-}
-defaultCardList.renderItems();
+const apiPatchUserData = new Api({
+  method: 'PATCH',
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-44/users/me',
+  headers: {
+    authorization: '17e41917-a2e7-4ed8-bcef-86b0aad6a6d8'
+  },
+  // body: JSON.stringify({
+  //   name: 'Marie Skłodowska Curie',
+  //   about: 'Physicist and Chemist'
+  // })
 })
-
+apiPatchUserData.patchServerData('Юрий Алексеевич Гагарин', 'Лётчик-космонавт', 'https://histrf.ru/images/biographies/12/gStuerWbjg8H4QDdyRY7TdtXconTX2duaHXOUz8f.jpg');
+// API установка данных профиля
+apiUserData.getServerData()
+  .then(items => {
+    profileName.textContent = items.name;
+    profileAbout.textContent = items.about;
+    profileImg.src = items.avatar;
+  })
+// API генерация начальных карточек
+apiCardsData.getServerData()
+  .then(item => {
+    const defaultCardList = new Section({
+      items: item,
+      renderer: (item) => createCard(item.name, item.link, templateId, handleCardClick)
+    }, classNameElements);
+    function createCard(name, link, template, handleCardClick) {
+      const card = new Card(name, link, template, handleCardClick).generateCard();
+      defaultCardList.addItem(card);
+    }
+    defaultCardList.renderItems();
+  })
+//
 
 
 // Обработка карточек классом Card и добавление в разметку классом Section
@@ -104,15 +122,6 @@ function openCardPopupHandler() {
   cardValidation.deactivButton();
   cardForm.openPopup();
 }
-
-// Установка данных с сервера
-apiUserData.getServerData()
-  .then(items => {
-    profileName.textContent = items.name;
-    profileAbout.textContent = items.about;
-    profileImg.src = items.avatar;
-  })
-
 
 // Настройка слушателей
 //
