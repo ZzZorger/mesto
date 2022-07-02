@@ -63,7 +63,14 @@ const apiPatchUserData = new Api({
   //   about: 'Physicist and Chemist'
   // })
 })
-apiPatchUserData.patchServerData('Юрий Алексеевич Гагарин', 'Лётчик-космонавт', 'https://histrf.ru/images/biographies/12/gStuerWbjg8H4QDdyRY7TdtXconTX2duaHXOUz8f.jpg');
+const apiPostCard = new Api({
+  method: 'POST',
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-44/cards',
+  headers: {
+    authorization: '17e41917-a2e7-4ed8-bcef-86b0aad6a6d8'
+  }
+})
+
 // API установка данных профиля
 apiUserData.getServerData()
   .then(items => {
@@ -76,14 +83,16 @@ apiCardsData.getServerData()
   .then(item => {
     const defaultCardList = new Section({
       items: item,
-      renderer: (item) => createCard(item.name, item.link, templateId, handleCardClick)
+      renderer: (item) => createCard(item.name, item.link, item.likes, templateId, handleCardClick)
     }, classNameElements);
-    function createCard(name, link, template, handleCardClick) {
-      const card = new Card(name, link, template, handleCardClick).generateCard();
+    function createCard(name, link, likes, template, handleCardClick) {
+      const card = new Card(name, link, likes, template, handleCardClick).generateCard();
       defaultCardList.addItem(card);
     }
     defaultCardList.renderItems();
   })
+apiPatchUserData.patchProfileData('Юрий Алексеевич Гагарин', 'Лётчик-космонавт', 'https://histrf.ru/images/biographies/12/gStuerWbjg8H4QDdyRY7TdtXconTX2duaHXOUz8f.jpg');
+// apiPostCard.postCard('фывфыв', 'https://shwanoff.ru/wp-content/uploads/2019/02/z_1FfKLtsns.jpg');
 //
 
 

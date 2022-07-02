@@ -31,7 +31,7 @@ export default class Api {
       })
   }
 
-  patchServerData(profileName, profileAbout) {
+  patchProfileData(profileName, profileAbout) {
     return fetch(this._server, {
       method: this._method,
       headers: {
@@ -54,6 +54,28 @@ export default class Api {
       })
   }
 
+  postCard(cardName, cardLink) {
+    return fetch(this._server, {
+      method: this._method,
+      headers: {
+        authorization: this._authorization,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: cardName,
+        link: cardLink
+      })
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json()
+        }
+        return Promise.reject(`Ошибка: ${res.status}`)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
   // getUserData() {
   // return fetch(this._server, {
   //   headers: {
