@@ -20,6 +20,10 @@ export const imgPopupTitle = imgPopup.querySelector('.img-popup__title');
 export const profileName = document.querySelector('.profile__name');
 export const profileAbout = document.querySelector('.profile__job');
 export const profileImg = document.querySelector('.profile__image');
+// export const confirmPopup = document.querySelector('.popup-confirm');
+export const confirmPopupClass = '.popup-confirm';
+export const confirmButton = document.querySelector('.popup__confirm');
+export const baseUrl = 'https://nomoreparties.co/v1/cohort-44';
 
 export const initialCards = [
   {

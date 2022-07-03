@@ -20,78 +20,75 @@ import {
   cardPopupClass,
   profileName,
   profileAbout,
-  profileImg
+  profileImg,
+  confirmPopupClass,
+  baseUrl
 }
   from "../utils/constants.js";
+import PopupWithConfirmation from '../components/PopupWithConfirmation.js';
 
 
+
+// API
+const apiUserData = new Api({
+  baseUrl: `${baseUrl}/users/me`
+});
+const apiCardsData = new Api({
+  baseUrl: `${baseUrl}/cards`
+});
+const apiPatchUserData = new Api({
+  method: 'PATCH',
+  baseUrl: `${baseUrl}/users/me`
+})
+const apiPostCard = new Api({
+  method: 'POST',
+  baseUrl: `${baseUrl}/cards`
+})
+const apiDeleteCard = new Api({
+  method: 'DELETE',
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-44/cards'
+})
 // Объявление классов
 //
 const userInfo = new UserInfo({ name: '.profile__name', info: '.profile__job' });
 const popupWithImage = new PopupWithImage('.img-popup');
-const profileForm = new PopupWithForm({
-  popupSelector: profilePopupClass,
-  submitFormHandler: (input) => userInfo.setUserData(input)
-});
 const cardForm = new PopupWithForm({
   popupSelector: cardPopupClass,
   submitFormHandler: (input) => createCard(input['card-name'], input['card-url'], templateId, handleCardClick)
 });
 const profileValidation = new FormValidator(popupData, profilePopupForm);
 const cardValidation = new FormValidator(popupData, cardPopupForm);
-// API
-const apiUserData = new Api({
-  baseUrl: 'https://nomoreparties.co/v1/cohort-44/users/me',
-  headers: {
-    authorization: '17e41917-a2e7-4ed8-bcef-86b0aad6a6d8'
-  }
-});
-const apiCardsData = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-44/cards',
-  headers: {
-    authorization: '17e41917-a2e7-4ed8-bcef-86b0aad6a6d8'
-  }
-});
-const apiPatchUserData = new Api({
-  method: 'PATCH',
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-44/users/me',
-  headers: {
-    authorization: '17e41917-a2e7-4ed8-bcef-86b0aad6a6d8'
-  },
-  // body: JSON.stringify({
-  //   name: 'Marie Skłodowska Curie',
-  //   about: 'Physicist and Chemist'
-  // })
-})
-const apiPostCard = new Api({
-  method: 'POST',
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-44/cards',
-  headers: {
-    authorization: '17e41917-a2e7-4ed8-bcef-86b0aad6a6d8'
-  }
-})
-
+const confirmPopup = new PopupWithConfirmation(confirmPopupClass);
 // API установка данных профиля
 apiUserData.getServerData()
-  .then(items => {
-    profileName.textContent = items.name;
-    profileAbout.textContent = items.about;
-    profileImg.src = items.avatar;
-  })
+.then(items => {
+  userInfo.setUserData(items);
+})
+
+const profileForm = new PopupWithForm({
+  popupSelector: profilePopupClass,
+  submitFormHandler: (input) => {
+    apiPatchUserData.patchProfileData(input)
+    .then(items => {
+      userInfo.setUserData(items);
+    })
+  }
+});
+
 // API генерация начальных карточек
 apiCardsData.getServerData()
   .then(item => {
     const defaultCardList = new Section({
       items: item,
-      renderer: (item) => createCard(item.name, item.link, item.likes, templateId, handleCardClick)
+      renderer: (item) => createCard({item}, templateId, handleCardClick, confirmDeletePopup)
     }, classNameElements);
-    function createCard(name, link, likes, template, handleCardClick) {
-      const card = new Card(name, link, likes, template, handleCardClick).generateCard();
+    function createCard({item}, template, handleCardClick, confirmDeletePopup) {
+      const card = new Card({item}, template, handleCardClick, confirmDeletePopup).generateCard();
       defaultCardList.addItem(card);
     }
     defaultCardList.renderItems();
   })
-apiPatchUserData.patchProfileData('Юрий Алексеевич Гагарин', 'Лётчик-космонавт', 'https://histrf.ru/images/biographies/12/gStuerWbjg8H4QDdyRY7TdtXconTX2duaHXOUz8f.jpg');
+// apiPatchUserData.patchProfileData('Юрий Алексеевич Гагарин', 'Лётчик-космонавт', 'https://histrf.ru/images/biographies/12/gStuerWbjg8H4QDdyRY7TdtXconTX2duaHXOUz8f.jpg');
 // apiPostCard.postCard('фывфыв', 'https://shwanoff.ru/wp-content/uploads/2019/02/z_1FfKLtsns.jpg');
 //
 
@@ -107,6 +104,16 @@ apiPatchUserData.patchProfileData('Юрий Алексеевич Гагарин'
 // Слушатель открытия попапа с картинкой
 function handleCardClick(name, link) {
   popupWithImage.openPopup(name, link)
+}
+function confirmDeletePopup(id) {
+  confirmPopup.openPopup();
+  console.log(id)
+  // confirmPopup.setEventListeners(id);
+// console.log(func)
+
+  // console.log(id)
+  // confirmButton.addEventListener('click', confirmPopup.deleteCard(id))
+  // console.log(this)
 }
 // Создать карточку
 // function createCard(name, link, template, handleCardClick) {

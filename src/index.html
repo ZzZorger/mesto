@@ -51,12 +51,12 @@
       <form class="popup__form" name="popup_data" novalidate>
         <fieldset class="popup__fieldset">
           <div class="popup__input-field">
-            <input id="profile-name" class="popup__input popup__input_type_name" type="text" name="profile-name"
+            <input id="profile-name" class="popup__input popup__input_type_name" type="text" name="name"
               autocomplete="off" placeholder="Имя" minlength="2" maxlength="40" required>
             <span class="popup__error profile-name-error" name="Error"></span>
           </div>
           <div class="popup__input-field">
-            <input id="profile-about" class="popup__input popup__input_type_place" type="text" name="profile-about"
+            <input id="profile-about" class="popup__input popup__input_type_place" type="text" name="about"
               autocomplete="off" placeholder="Профессиональная деятельность" minlength="2" maxlength="200" required>
             <span class="popup__error profile-about-error" name="Error"></span>
           </div>
@@ -84,6 +84,13 @@
         </fieldset>
         <button class="popup__save-button" type="submit">Создать</button>
       </form>
+    </div>
+  </div>
+  <div class="popup popup-confirm">
+    <div class="popup__content">
+      <button class="close-button" type="button" aria-label="закрыть окно"></button>
+      <h2 class="popup__title">Вы уверены?</h2>
+      <button class="popup__save-button popup__confirm" type="button">Да</button>
     </div>
   </div>
   <div class="popup img-popup">
