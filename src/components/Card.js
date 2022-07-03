@@ -1,14 +1,13 @@
 export default class Card {
-  constructor({item}, cardSelector, handleCardClick, confirmDeletePopup) {
-    
-    this._id = item._id;
-    this._name = item.name;
-    this._link = item.link;
-    this._likes = item.likes;
-    this._cardSelector = cardSelector;
-    this._handleCardClick = handleCardClick;
-    this._confirmDeletePopup = confirmDeletePopup;
-    // console.log(item)
+  constructor(options) {
+    this._id = options.item._id;
+    this._name = options.item.name;
+    this._link = options.item.link;
+    this._likes = options.item.likes;
+    this._cardSelector = options.template;
+    this._handleCardClick = options.handleCardClick;
+    this._confirmDeletePopup = options.confirmDeletePopup;
+    // console.log(options)
   }
 
   _getTemplate() {

@@ -43,7 +43,7 @@ export default class Api {
       console.log(err)
     })
   }
-  postCard(cardName, cardLink) {
+  postCard(input) {
     return fetch(this._server, {
       method: this._method,
       headers: {
@@ -51,8 +51,8 @@ export default class Api {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        name: cardName,
-        link: cardLink
+        name: input.name,
+        link: input.url
       })
     })
     .then((res) => {

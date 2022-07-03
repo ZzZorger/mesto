@@ -52,10 +52,10 @@ const apiDeleteCard = new Api({
 //
 const userInfo = new UserInfo({ name: '.profile__name', info: '.profile__job' });
 const popupWithImage = new PopupWithImage('.img-popup');
-const cardForm = new PopupWithForm({
-  popupSelector: cardPopupClass,
-  submitFormHandler: (input) => createCard(input['card-name'], input['card-url'], templateId, handleCardClick)
-});
+// const cardForm = new PopupWithForm({
+//   popupSelector: cardPopupClass,
+//   submitFormHandler: (input) => createCard(input['card-name'], input['card-url'], templateId, handleCardClick)
+// });
 const profileValidation = new FormValidator(popupData, profilePopupForm);
 const cardValidation = new FormValidator(popupData, cardPopupForm);
 const confirmPopup = new PopupWithConfirmation(confirmPopupClass);
@@ -75,22 +75,143 @@ const profileForm = new PopupWithForm({
   }
 });
 
+
+// function createNewCard(options) {
+//   const defaultCardList = new Section({
+//     items: item, 
+//     renderer: (item) => createCard({
+//       item: item,
+//       template: templateId,
+//       handleCardClick: handleCardClick,
+//       confirmDeletePopup: confirmDeletePopup
+//     }), 
+//     containerSelector: classNameElements
+//   });
+//   const card = new Card(options).generateCard();
+//   defaultCardList.addItem(card);
+// }
+// function renderer(item) {
+//   createCard({
+//     item: item,
+//     template: templateId,
+//     handleCardClick: handleCardClick,
+//     confirmDeletePopup: confirmDeletePopup
+//   })
+// }
+function createCard(options) {
+  const card = new Card(options).generateCard();
+  const section = new Section(options).addItem(card);
+}
+// function initialCardsRender(items) {
+//   const section = new Section(items).renderItems;
+// }
+// createCard({
+//   item: {
+//     _id: '_id',
+//     name: 'Домик',
+//     link: 'https://s0.rbk.ru/v6_top_pics/media/img/6/91/756131883823916.jpg',
+//     likes: '111'
+//   },
+//   template: templateId,
+//   handleCardClick: handleCardClick,
+//   confirmDeletePopup: confirmDeletePopup,
+//   containerSelector: classNameElements
+// })
 // API генерация начальных карточек
+// apiCardsData.getServerData()
+// .then(item => {
+//   // createCard(item)
+//   console.log(item)
+  
+
+
+//   const defaultCardList = new Section({
+//     items: item, 
+//     renderer: (item) => createCard({
+//       item: item,
+//       template: templateId,
+//       handleCardClick: handleCardClick,
+//       confirmDeletePopup: confirmDeletePopup
+//     }), 
+//     containerSelector: classNameElements
+//   });
+//   function createCard({item}, template, handleCardClick, confirmDeletePopup) {
+//     const card = new Card({item}, template, handleCardClick, confirmDeletePopup).generateCard();
+//     defaultCardList.addItem(card);
+//   }
+//   defaultCardList.renderItems();
+// })
+
+
 apiCardsData.getServerData()
-  .then(item => {
-    const defaultCardList = new Section({
-      items: item,
-      renderer: (item) => createCard({item}, templateId, handleCardClick, confirmDeletePopup)
-    }, classNameElements);
-    function createCard({item}, template, handleCardClick, confirmDeletePopup) {
-      const card = new Card({item}, template, handleCardClick, confirmDeletePopup).generateCard();
-      defaultCardList.addItem(card);
-    }
-    defaultCardList.renderItems();
-  })
-// apiPatchUserData.patchProfileData('Юрий Алексеевич Гагарин', 'Лётчик-космонавт', 'https://histrf.ru/images/biographies/12/gStuerWbjg8H4QDdyRY7TdtXconTX2duaHXOUz8f.jpg');
-// apiPostCard.postCard('фывфыв', 'https://shwanoff.ru/wp-content/uploads/2019/02/z_1FfKLtsns.jpg');
+.then(item => {
+  const defaultCardList = new Section({
+    items: item, 
+    renderer: (item) => createCard(item), 
+    containerSelector: classNameElements
+  });
+  function createCard(item) {
+    const card = new Card({
+        item: {
+          _id: item._id,
+          name: item.name,
+          link: item.link,
+          likes: item.likes
+        },
+        template: templateId,
+        handleCardClick: handleCardClick,
+        confirmDeletePopup: confirmDeletePopup,
+        containerSelector: classNameElements
+      }).generateCard();
+    defaultCardList.addItem(card);
+  }
+  defaultCardList.renderItems();
+})
+
+const cardForm = new PopupWithForm({
+  popupSelector: cardPopupClass,
+  submitFormHandler: (input) => {
+    apiPostCard.postCard(input)
+    .then(item => {
+      createCard({
+        item: {
+          _id: item._id,
+          name: item.name,
+          link: item.link,
+          likes: item.likes
+        },
+        template: templateId,
+        handleCardClick: handleCardClick,
+        confirmDeletePopup: confirmDeletePopup,
+        containerSelector: classNameElements
+      })
+    })
+  }
+});
+// createCard({
+//   item: {
+//     _id: '_id',
+//     name: 'Домик',
+//     link: 'https://s0.rbk.ru/v6_top_pics/media/img/6/91/756131883823916.jpg',
+//     likes: '111'
+//   },
+//   template: templateId,
+//   handleCardClick: handleCardClick,
+//   confirmDeletePopup: confirmDeletePopup,
+//   containerSelector: classNameElements
+// })
+// const cardForm = new PopupWithForm({
+//   popupSelector: cardPopupClass,
+//   submitFormHandler: (input) => createCard(input['card-name'], input['card-url'], templateId, handleCardClick)
+// });
 //
+// apiPostCard.postCard(item)
+// .then(item => {
+//   console.log(item)
+// })
+
+
+
 
 
 // Обработка карточек классом Card и добавление в разметку классом Section
