@@ -6,7 +6,6 @@ import UserInfo from '../components/UserInfo.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import Api from '../components/Api.js';
 import {
-  // initialCards,
   classNameElements,
   templateId,
   popupProfileEditButton,
@@ -18,15 +17,11 @@ import {
   popupProfilePlace,
   profilePopupClass,
   cardPopupClass,
-  profileName,
-  profileAbout,
-  profileImg,
   confirmPopupClass,
   baseUrl
 }
   from "../utils/constants.js";
 import PopupWithConfirmation from '../components/PopupWithConfirmation.js';
-
 
 
 // API
@@ -52,13 +47,9 @@ const apiDeleteCard = new Api({
 //
 const userInfo = new UserInfo({ name: '.profile__name', info: '.profile__job' });
 const popupWithImage = new PopupWithImage('.img-popup');
-// const cardForm = new PopupWithForm({
-//   popupSelector: cardPopupClass,
-//   submitFormHandler: (input) => createCard(input['card-name'], input['card-url'], templateId, handleCardClick)
-// });
 const profileValidation = new FormValidator(popupData, profilePopupForm);
 const cardValidation = new FormValidator(popupData, cardPopupForm);
-const confirmPopup = new PopupWithConfirmation(confirmPopupClass);
+const confirmPopup = new PopupWithConfirmation(confirmPopupClass, apiDeleteCard);
 // API установка данных профиля
 apiUserData.getServerData()
 .then(items => {
@@ -75,73 +66,10 @@ const profileForm = new PopupWithForm({
   }
 });
 
-
-// function createNewCard(options) {
-//   const defaultCardList = new Section({
-//     items: item, 
-//     renderer: (item) => createCard({
-//       item: item,
-//       template: templateId,
-//       handleCardClick: handleCardClick,
-//       confirmDeletePopup: confirmDeletePopup
-//     }), 
-//     containerSelector: classNameElements
-//   });
-//   const card = new Card(options).generateCard();
-//   defaultCardList.addItem(card);
-// }
-// function renderer(item) {
-//   createCard({
-//     item: item,
-//     template: templateId,
-//     handleCardClick: handleCardClick,
-//     confirmDeletePopup: confirmDeletePopup
-//   })
-// }
 function createCard(options) {
   const card = new Card(options).generateCard();
   const section = new Section(options).addItem(card);
 }
-// function initialCardsRender(items) {
-//   const section = new Section(items).renderItems;
-// }
-// createCard({
-//   item: {
-//     _id: '_id',
-//     name: 'Домик',
-//     link: 'https://s0.rbk.ru/v6_top_pics/media/img/6/91/756131883823916.jpg',
-//     likes: '111'
-//   },
-//   template: templateId,
-//   handleCardClick: handleCardClick,
-//   confirmDeletePopup: confirmDeletePopup,
-//   containerSelector: classNameElements
-// })
-// API генерация начальных карточек
-// apiCardsData.getServerData()
-// .then(item => {
-//   // createCard(item)
-//   console.log(item)
-  
-
-
-//   const defaultCardList = new Section({
-//     items: item, 
-//     renderer: (item) => createCard({
-//       item: item,
-//       template: templateId,
-//       handleCardClick: handleCardClick,
-//       confirmDeletePopup: confirmDeletePopup
-//     }), 
-//     containerSelector: classNameElements
-//   });
-//   function createCard({item}, template, handleCardClick, confirmDeletePopup) {
-//     const card = new Card({item}, template, handleCardClick, confirmDeletePopup).generateCard();
-//     defaultCardList.addItem(card);
-//   }
-//   defaultCardList.renderItems();
-// })
-
 
 apiCardsData.getServerData()
 .then(item => {
@@ -188,37 +116,6 @@ const cardForm = new PopupWithForm({
     })
   }
 });
-// createCard({
-//   item: {
-//     _id: '_id',
-//     name: 'Домик',
-//     link: 'https://s0.rbk.ru/v6_top_pics/media/img/6/91/756131883823916.jpg',
-//     likes: '111'
-//   },
-//   template: templateId,
-//   handleCardClick: handleCardClick,
-//   confirmDeletePopup: confirmDeletePopup,
-//   containerSelector: classNameElements
-// })
-// const cardForm = new PopupWithForm({
-//   popupSelector: cardPopupClass,
-//   submitFormHandler: (input) => createCard(input['card-name'], input['card-url'], templateId, handleCardClick)
-// });
-//
-// apiPostCard.postCard(item)
-// .then(item => {
-//   console.log(item)
-// })
-
-
-
-
-
-// Обработка карточек классом Card и добавление в разметку классом Section
-// const defaultCardList = new Section({
-//   items: initialCards,
-//   renderer: (item) => createCard(item.name, item.link, templateId, handleCardClick)
-// }, classNameElements);
 
 // Объявление функций
 //
@@ -228,20 +125,9 @@ function handleCardClick(name, link) {
 }
 function confirmDeletePopup(id) {
   confirmPopup.openPopup();
-  console.log(id)
-  // confirmPopup.setEventListeners(id);
-// console.log(func)
-
-  // console.log(id)
-  // confirmButton.addEventListener('click', confirmPopup.deleteCard(id))
-  // console.log(this)
+  confirmPopup.setEventListeners(id);
 }
-// Создать карточку
-// function createCard(name, link, template, handleCardClick) {
-//   const card = new Card(name, link, template, handleCardClick).generateCard();
-//   defaultCardList.addItem(card);
-//   // renderdefaultCardList.addItem(card);
-// }
+
 // Валидация
 profileValidation.enableValidation();
 cardValidation.enableValidation();
@@ -263,7 +149,6 @@ function openCardPopupHandler() {
 // Настройка слушателей
 //
 popupWithImage.setEventListeners();
-// defaultCardList.renderItems();
 profileForm.setEventListeners();
 cardForm.setEventListeners();
 popupProfileEditButton.addEventListener('click', openProfilePopupHandler);

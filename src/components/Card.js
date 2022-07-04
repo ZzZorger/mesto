@@ -18,17 +18,11 @@ export default class Card {
       .cloneNode(true);
   }
 
-  _deleteProfileCardHandler() {
-    // this._element.remove();
-    document.getElementById(this._id).parentElement.remove();
-  }
-
   _likeProfileCardHandler() {
     this._cardLike.classList.toggle('card__like-button_active');
   }
 
   _setEventListeners() {
-    // this._cardDelete.addEventListener('click', () => this._deleteProfileCardHandler());
     this._cardDelete.addEventListener('click', () => this._confirmDeletePopup(this._id));
     this._cardLike.addEventListener('click', () => this._likeProfileCardHandler());
     this._cardImg.addEventListener('click', () => this._handleCardClick(this._name, this._link))

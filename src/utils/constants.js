@@ -22,6 +22,8 @@ export const profileAbout = document.querySelector('.profile__job');
 export const profileImg = document.querySelector('.profile__image');
 // export const confirmPopup = document.querySelector('.popup-confirm');
 export const confirmPopupClass = '.popup-confirm';
+export const confirmPopup = document.querySelector(confirmPopupClass);
+export const confirmPopupButton = confirmPopup.querySelector('.popup__save-button');
 export const confirmButton = document.querySelector('.popup__confirm');
 export const baseUrl = 'https://nomoreparties.co/v1/cohort-44';
 
