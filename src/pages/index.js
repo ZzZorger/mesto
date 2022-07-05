@@ -66,17 +66,14 @@ const profileForm = new PopupWithForm({
   }
 });
 
-function createCard(options) {
-  const card = new Card(options).generateCard();
-  const section = new Section(options).addItem(card);
-}
+
 Promise.all([apiCardsData.getServerData(), apiUserData.getServerData()])
 .then((item) => {
   const userID = item[1]._id;
   const cardArray = item[0];
   const defaultCardList = new Section({
     items: cardArray, 
-    renderer: (cardArray) => createCard(cardArray), 
+    renderer: (cardOptions) => createCard(cardOptions), 
     containerSelector: classNameElements
   });
   function createCard(item) {
@@ -97,28 +94,46 @@ Promise.all([apiCardsData.getServerData(), apiUserData.getServerData()])
     defaultCardList.addItem(card);
   }
   defaultCardList.renderItems();
+
+  const cardForm = new PopupWithForm({
+    popupSelector: cardPopupClass,
+    submitFormHandler: (input) => {
+      apiPostCard.postCard(input)
+      .then(item => {
+        createCard(item)
+      })
+    }
+  });
+  function openCardPopupHandler() {
+    cardValidation.deactivButton();
+    cardForm.openPopup();
+  }
+  cardForm.setEventListeners();
+  popupAddCardButton.addEventListener('click', openCardPopupHandler);
 })
 
-const cardForm = new PopupWithForm({
-  popupSelector: cardPopupClass,
-  submitFormHandler: (input) => {
-    apiPostCard.postCard(input)
-    .then(item => {
-      createCard({
-        item: {
-          _id: item._id,
-          name: item.name,
-          link: item.link,
-          likes: item.likes
-        },
-        template: templateId,
-        handleCardClick: handleCardClick,
-        confirmDeletePopup: confirmDeletePopup,
-        containerSelector: classNameElements
-      })
-    })
-  }
-});
+// const cardForm = new PopupWithForm({
+//   popupSelector: cardPopupClass,
+//   submitFormHandler: (input) => {
+//     apiPostCard.postCard(input)
+//     .then(item => {
+//       // console.log(item)
+//       createCard({
+//         item: {
+//           _id: item._id,
+//           name: item.name,
+//           link: item.link,
+//           likes: item.likes,
+//           ownerData: item.owner
+//         },
+//         template: templateId,
+//         handleCardClick: handleCardClick,
+//         confirmDeletePopup: confirmDeletePopup,
+//         containerSelector: classNameElements
+//       })
+//     })
+//   }
+// });
 
 // Объявление функций
 //
@@ -144,15 +159,15 @@ function openProfilePopupHandler() {
 }
 
 // Открыть попап создания карточки
-function openCardPopupHandler() {
-  cardValidation.deactivButton();
-  cardForm.openPopup();
-}
+// function openCardPopupHandler() {
+//   cardValidation.deactivButton();
+//   cardForm.openPopup();
+// }
 
 // Настройка слушателей
 //
 popupWithImage.setEventListeners();
 profileForm.setEventListeners();
-cardForm.setEventListeners();
+// cardForm.setEventListeners();
 popupProfileEditButton.addEventListener('click', openProfilePopupHandler);
-popupAddCardButton.addEventListener('click', openCardPopupHandler);
+// popupAddCardButton.addEventListener('click', openCardPopupHandler);
