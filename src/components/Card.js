@@ -7,8 +7,8 @@ export default class Card {
     this._cardSelector = options.template;
     this._handleCardClick = options.handleCardClick;
     this._confirmDeletePopup = options.confirmDeletePopup;
-    // this._ownerID = options.item.ownerData._id;
-    // console.log(options)
+    this._ownerID = options.item.ownerData._id;
+    this._userID = options.item.userID;
   }
 
   _getTemplate() {
@@ -36,7 +36,9 @@ export default class Card {
     this._cardLike = this._element.querySelector('.card__like-button');
     this._cardLikeNumber = this._element.querySelector('.card__like-number');
     this._cardDelete = this._element.querySelector('.card__delete-button');
-
+    if (this._userID !== this._ownerID) {
+      this._cardDelete.remove()
+    }
     this._cardImg.src = this._link;
     this._cardImg.id = this._id;
     this._cardImg.alt = this._name;

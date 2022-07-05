@@ -70,24 +70,24 @@ function createCard(options) {
   const card = new Card(options).generateCard();
   const section = new Section(options).addItem(card);
 }
-
-apiCardsData.getServerData()
-.then(item => {
-  // console.log(item)
+Promise.all([apiCardsData.getServerData(), apiUserData.getServerData()])
+.then((item) => {
+  const userID = item[1]._id;
+  const cardArray = item[0];
   const defaultCardList = new Section({
-    items: item, 
-    renderer: (item) => createCard(item), 
+    items: cardArray, 
+    renderer: (cardArray) => createCard(cardArray), 
     containerSelector: classNameElements
   });
   function createCard(item) {
-    // console.log(item)
     const card = new Card({
         item: {
           _id: item._id,
           name: item.name,
           link: item.link,
           likes: item.likes,
-          ownerData: item.owner
+          ownerData: item.owner,
+          userID: userID
         },
         template: templateId,
         handleCardClick: handleCardClick,
@@ -120,28 +120,6 @@ const cardForm = new PopupWithForm({
   }
 });
 
-const userIdPromis = apiUserData.getServerData()
-.then(item => {
-  return item._id
-  // cardsArray.forEach(items => {
-  //   const id = items.owner._id;
-  //   if ()
-  // })
-})
-const cardsOwnerIdPromis = apiCardsData.getServerData()
-.then(item => {
-  // return item
-  item.forEach(data => {
-    // const id = data.owner._id;
-    return data
-  })
-})
-// console.log(cardsOwnerIdPromis)
-const promises = [userIdPromis, cardsOwnerIdPromis]
-Promise.all(promises)
-.then((res) => {
-  console.log(res)
-})
 // Объявление функций
 //
 // Слушатель открытия попапа с картинкой
