@@ -73,18 +73,21 @@ function createCard(options) {
 
 apiCardsData.getServerData()
 .then(item => {
+  // console.log(item)
   const defaultCardList = new Section({
     items: item, 
     renderer: (item) => createCard(item), 
     containerSelector: classNameElements
   });
   function createCard(item) {
+    // console.log(item)
     const card = new Card({
         item: {
           _id: item._id,
           name: item.name,
           link: item.link,
-          likes: item.likes
+          likes: item.likes,
+          ownerData: item.owner
         },
         template: templateId,
         handleCardClick: handleCardClick,
@@ -117,6 +120,28 @@ const cardForm = new PopupWithForm({
   }
 });
 
+const userIdPromis = apiUserData.getServerData()
+.then(item => {
+  return item._id
+  // cardsArray.forEach(items => {
+  //   const id = items.owner._id;
+  //   if ()
+  // })
+})
+const cardsOwnerIdPromis = apiCardsData.getServerData()
+.then(item => {
+  // return item
+  item.forEach(data => {
+    // const id = data.owner._id;
+    return data
+  })
+})
+// console.log(cardsOwnerIdPromis)
+const promises = [userIdPromis, cardsOwnerIdPromis]
+Promise.all(promises)
+.then((res) => {
+  console.log(res)
+})
 // Объявление функций
 //
 // Слушатель открытия попапа с картинкой

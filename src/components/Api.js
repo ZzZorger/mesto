@@ -82,4 +82,26 @@ export default class Api {
       console.log(err)
     })
   }
+  // putLike() {
+  //   return fetch(this._server, {
+  //     method: this._method,
+  //     headers: {
+  //       authorization: this._authorization,
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: JSON.stringify({
+  //       name: input.name,
+  //       about: input.about
+  //     })
+  //   })
+  //   .then((res) => {
+  //     if (res.ok) {
+  //       return res.json()
+  //     }
+  //     return Promise.reject(`Ошибка: ${res.status}`)
+  //   })
+  //   .catch((err) => {
+  //     console.log(err)
+  //   })
+  // }
 }
