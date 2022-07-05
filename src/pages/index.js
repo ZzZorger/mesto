@@ -41,7 +41,7 @@ const apiPostCard = new Api({
 })
 const apiDeleteCard = new Api({
   method: 'DELETE',
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-44/cards'
+  baseUrl: `${baseUrl}/cards`
 })
 // Объявление классов
 //
@@ -50,12 +50,6 @@ const popupWithImage = new PopupWithImage('.img-popup');
 const profileValidation = new FormValidator(popupData, profilePopupForm);
 const cardValidation = new FormValidator(popupData, cardPopupForm);
 const confirmPopup = new PopupWithConfirmation(confirmPopupClass, apiDeleteCard);
-// API установка данных профиля
-apiUserData.getServerData()
-.then(items => {
-  userInfo.setUserData(items);
-})
-
 const profileForm = new PopupWithForm({
   popupSelector: profilePopupClass,
   submitFormHandler: (input) => {
@@ -65,12 +59,24 @@ const profileForm = new PopupWithForm({
     })
   }
 });
+// API установка данных профиля
+apiUserData.getServerData()
+.then(items => {
+  userInfo.setUserData(items);
+})
 
-
+// Создание карточек
 Promise.all([apiCardsData.getServerData(), apiUserData.getServerData()])
 .then((item) => {
   const userID = item[1]._id;
   const cardArray = item[0];
+  function handleCardClick(name, link) {
+    popupWithImage.openPopup(name, link)
+  }
+  function confirmDeletePopup(id) {
+    confirmPopup.openPopup();
+    confirmPopup.setEventListeners(id);
+  }
   const defaultCardList = new Section({
     items: cardArray, 
     renderer: (cardOptions) => createCard(cardOptions), 
@@ -111,40 +117,9 @@ Promise.all([apiCardsData.getServerData(), apiUserData.getServerData()])
   cardForm.setEventListeners();
   popupAddCardButton.addEventListener('click', openCardPopupHandler);
 })
-
-// const cardForm = new PopupWithForm({
-//   popupSelector: cardPopupClass,
-//   submitFormHandler: (input) => {
-//     apiPostCard.postCard(input)
-//     .then(item => {
-//       // console.log(item)
-//       createCard({
-//         item: {
-//           _id: item._id,
-//           name: item.name,
-//           link: item.link,
-//           likes: item.likes,
-//           ownerData: item.owner
-//         },
-//         template: templateId,
-//         handleCardClick: handleCardClick,
-//         confirmDeletePopup: confirmDeletePopup,
-//         containerSelector: classNameElements
-//       })
-//     })
-//   }
-// });
-
-// Объявление функций
-//
-// Слушатель открытия попапа с картинкой
-function handleCardClick(name, link) {
-  popupWithImage.openPopup(name, link)
-}
-function confirmDeletePopup(id) {
-  confirmPopup.openPopup();
-  confirmPopup.setEventListeners(id);
-}
+.catch((err) => {
+  console.log(err)
+})
 
 // Валидация
 profileValidation.enableValidation();
@@ -158,16 +133,7 @@ function openProfilePopupHandler() {
   profileForm.openPopup();
 }
 
-// Открыть попап создания карточки
-// function openCardPopupHandler() {
-//   cardValidation.deactivButton();
-//   cardForm.openPopup();
-// }
-
 // Настройка слушателей
-//
 popupWithImage.setEventListeners();
 profileForm.setEventListeners();
-// cardForm.setEventListeners();
 popupProfileEditButton.addEventListener('click', openProfilePopupHandler);
-// popupAddCardButton.addEventListener('click', openCardPopupHandler);
