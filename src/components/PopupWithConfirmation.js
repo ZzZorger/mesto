@@ -4,7 +4,6 @@ export default class PopupWithConfirmation extends Popup {
   constructor(popupSelector, api) {
     super(popupSelector);
     this._button = this._popup.querySelector('.popup__save-button');
-    // this._cardElement = cardElement;
     this._api = api;
   }
   deleteCard(id) {

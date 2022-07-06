@@ -43,6 +43,16 @@ const apiDeleteCard = new Api({
   method: 'DELETE',
   baseUrl: `${baseUrl}/cards`
 })
+const apiLikeCard = new Api({
+  method: 'PUT',
+  baseUrl: `${baseUrl}/cards`
+})
+// const apiUnlikeCard = new Api({
+//   method: 'DELETE',
+//   baseUrl: `${baseUrl}/cards`
+// })
+
+
 // Объявление классов
 //
 const userInfo = new UserInfo({ name: '.profile__name', info: '.profile__job' });
@@ -95,7 +105,9 @@ Promise.all([apiCardsData.getServerData(), apiUserData.getServerData()])
         template: templateId,
         handleCardClick: handleCardClick,
         confirmDeletePopup: confirmDeletePopup,
-        containerSelector: classNameElements
+        containerSelector: classNameElements,
+        apiLike: apiLikeCard,
+        apiUnlike: apiDeleteCard
       }).generateCard();
     defaultCardList.addItem(card);
   }
