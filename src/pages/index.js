@@ -77,6 +77,29 @@ function openCardPopupHandler() {
 function handleCardClick(name, link) {
   popupWithImage.openPopup(name, link)
 }
+// Лайкнуть карточку
+function handleLikeClick({ options, cardLikeNumber, likesArray, cardLikeBtn }) {
+  const myLike = options.item.likes.some(function(like) {
+    return like._id == options.item.userID
+  })
+  if (myLike) {
+    api.putUnlike(options.item._id)
+        .then((res) => {
+          cardLikeNumber.textContent = res.likes.length
+          likesArray = res.likes
+          cardLikeBtn.classList.remove('card__like-button_active');
+        })
+  }
+  else {
+    api.putLike(options.item._id)
+      .then(res => {
+        cardLikeNumber.textContent = res.likes.length
+        likesArray = res.likes
+        cardLikeBtn.classList.add('card__like-button_active');
+      }) 
+  }
+}
+
 // Открыть попап удаления карточки
 function confirmDeletePopup(id) {
   confirmPopup.openPopup();
@@ -148,7 +171,7 @@ function createCard(item, userID) {
     handleCardClick: handleCardClick,
     confirmDeletePopup: confirmDeletePopup,
     containerSelector: classNameElements,
-    api: api
+    handleLikeClick: handleLikeClick
   }).generateCard();
   cardList.addItem(card);
 }
