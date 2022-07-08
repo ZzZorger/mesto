@@ -1,161 +1,80 @@
 export default class Api {
   constructor(options) {
     this._server = options.baseUrl;
-    //'https://nomoreparties.co/v1/cohort-44'
-    this._authorization = options.headers.authorization;
-    this._contentType = options.headers['Content-Type'];
-    // this._method = options.method;
-    // this._options = options;
+    this._headers = options.headers;
+  }
+  _getResponseData(res) {
+    if (res.ok) {
+      return res.json()
+    }
+    return Promise.reject(`Ошибка: ${res.status}`)
   }
   getServerData() {
     return fetch(`${this._server}/users/me`, {
       method: 'GET',
-      headers: {
-        authorization: this._authorization
-      }
+      headers: this._headers
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json()
-        }
-        return Promise.reject(`Ошибка: ${res.status}`)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+      .then((res) => this._getResponseData(res))
   }
   getCardsData() {
     return fetch(`${this._server}/cards`, {
       method: 'GET',
-      headers: {
-        authorization: this._authorization
-      }
+      headers: this._headers
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json()
-        }
-        return Promise.reject(`Ошибка: ${res.status}`)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+      .then((res) => this._getResponseData(res))
   }
   patchProfileData(input) {
     return fetch(`${this._server}/users/me`, {
       method: 'PATCH',
-      headers: {
-        authorization: this._authorization,
-        'Content-Type': this._contentType
-      },
+      headers: this._headers,
       body: JSON.stringify({
         name: input.name,
         about: input.about,
         avatar: input.url
       })
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json()
-        }
-        return Promise.reject(`Ошибка: ${res.status}`)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+      .then((res) => this._getResponseData(res))
   }
   postCard(input) {
     return fetch(`${this._server}/cards`, {
       method: 'POST',
-      headers: {
-        authorization: this._authorization,
-        'Content-Type': this._contentType
-      },
+      headers: this._headers,
       body: JSON.stringify({
         name: input.name,
         link: input.url
       })
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json()
-        }
-        return Promise.reject(`Ошибка: ${res.status}`)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+      .then((res) => this._getResponseData(res))
   }
   deleteCard(id) {
     return fetch(`${this._server}/cards/${id}`, {
       method: 'DELETE',
-      headers: {
-        authorization: this._authorization,
-      }
+      headers: this._headers
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json()
-        }
-        return Promise.reject(`Ошибка: ${res.status}`)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+      .then((res) => this._getResponseData(res))
   }
   putLike(id) {
     return fetch(`${this._server}/cards/${id}/likes`, {
       method: 'PUT',
-      headers: {
-        authorization: this._authorization
-      }
+      headers: this._headers
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json()
-        }
-        return Promise.reject(`Ошибка: ${res.status}`)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+      .then((res) => this._getResponseData(res))
   }
   putUnlike(id) {
     return fetch(`${this._server}/cards/${id}/likes`, {
       method: 'DELETE',
-      headers: {
-        authorization: this._authorization
-      }
+      headers: this._headers
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json()
-        }
-        return Promise.reject(`Ошибка: ${res.status}`)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+      .then((res) => this._getResponseData(res))
   }
   patchProfileAvatar(input) {
     return fetch(`${this._server}/users/me/avatar`, {
       method: 'PATCH',
-      headers: {
-        authorization: this._authorization,
-        'Content-Type': this._contentType
-      },
+      headers: this._headers,
       body: JSON.stringify({
         avatar: input.url
       })
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json()
-        }
-        return Promise.reject(`Ошибка: ${res.status}`)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+      .then((res) => this._getResponseData(res))
   }
 }

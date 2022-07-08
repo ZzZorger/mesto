@@ -50,7 +50,6 @@ export default class FormValidator {
         this._toggleButtonState();
       });
     });
-
   };
   deactivButton() {
     this._buttonElement.classList.add(this._inactiveButtonClass);
@@ -58,8 +57,5 @@ export default class FormValidator {
   }
   enableValidation() {
     this._setEventListeners();
-    this._formElement.addEventListener('submit', (evt) => {
-      evt.preventDefault();
-    });
   };
 }

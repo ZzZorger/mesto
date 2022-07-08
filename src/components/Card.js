@@ -10,8 +10,6 @@ export default class Card {
     this._ownerID = options.item.ownerData._id;
     this._userID = options.item.userID;
     this._api = options.api;
-    // this._apiLike = options.apiLike;
-    // this._apiUnlike = options.apiUnlike;
   }
 
   _getTemplate() {
