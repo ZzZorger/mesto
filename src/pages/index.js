@@ -27,8 +27,6 @@ import {
   from "../utils/constants.js";
 import PopupWithConfirmation from '../components/PopupWithConfirmation.js';
 
-
-
 // API запросы
 const apiUserData = new Api({
   baseUrl: `${baseUrl}/users/me`
