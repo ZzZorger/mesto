@@ -18,10 +18,8 @@ import {
   profilePopupClass,
   cardPopupClass,
   confirmPopupClass,
-  // baseUrl,
   avatarEditionButton,
   avatarPopupClass,
-  profileImg,
   avatarPopupForm
 }
   from "../utils/constants.js";
@@ -59,7 +57,7 @@ function avatarSubmitHandler(input) {
   avatarForm.renderSaving(true);
   api.patchProfileAvatar(input)
     .then(items => {
-      profileImg.src = items.avatar;
+      userInfo.setUserData(items);
     })
     .then(() => {
       avatarForm.closePopup();
@@ -74,7 +72,7 @@ function avatarSubmitHandler(input) {
 
 // Объявление классов
 //
-const userInfo = new UserInfo({ name: '.profile__name', info: '.profile__job' });
+const userInfo = new UserInfo({ name: '.profile__name', info: '.profile__job', avatar: '.profile__image' });
 const popupWithImage = new PopupWithImage('.img-popup');
 const profileValidation = new FormValidator(popupData, profilePopupForm);
 const cardValidation = new FormValidator(popupData, cardPopupForm);
@@ -92,16 +90,10 @@ const avatarForm = new PopupWithForm({
   submitFormHandler: (input) => avatarSubmitHandler(input)
 })
 
-// Установка данных профиля
-api.getServerData()
-  .then(items => {
-    userInfo.setUserData(items);
-    profileImg.src = items.avatar
-  })
-
 // Создание карточек
 Promise.all([api.getCardsData(), api.getServerData()])
   .then((item) => {
+    userInfo.setUserData(item[1]);
     const userID = item[1]._id;
     const cardArray = item[0];
     function handleCardClick(name, link) {
