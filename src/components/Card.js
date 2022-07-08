@@ -1,6 +1,5 @@
 export default class Card {
   constructor(options) {
-    // console.log(options.item)
     this._id = options.item._id;
     this._name = options.item.name;
     this._link = options.item.link;

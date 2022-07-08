@@ -98,7 +98,6 @@ const cardValidation = new FormValidator(popupData, cardPopupForm);
 const avatarValidation = new FormValidator(popupData, avatarPopupForm);
 const confirmPopup = new PopupWithConfirmation({
   popupSelector: confirmPopupClass,
-  submitFormHandler: (id) => confirmPopup.deleteCard(id),
   api: apiDelete
 });
 const profileForm = new PopupWithForm({
@@ -157,7 +156,7 @@ Promise.all([apiCardsData.getServerData(), apiUserData.getServerData()])
       defaultCardList.addItem(card);
     }
     defaultCardList.renderItems();
-    
+
     const cardForm = new PopupWithForm({
       popupSelector: cardPopupClass,
       submitFormHandler: (input) => cardSubmitHandler(input)
