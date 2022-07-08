@@ -9,8 +9,9 @@ export default class Card {
     this._confirmDeletePopup = options.confirmDeletePopup;
     this._ownerID = options.item.ownerData._id;
     this._userID = options.item.userID;
-    this._apiLike = options.apiLike;
-    this._apiUnlike = options.apiUnlike;
+    this._api = options.api;
+    // this._apiLike = options.apiLike;
+    // this._apiUnlike = options.apiUnlike;
   }
 
   _getTemplate() {
@@ -27,7 +28,7 @@ export default class Card {
       likesIdArray.push(this._likes[i]._id)
     }
     if (likesIdArray.includes(this._userID)) {
-      this._apiUnlike.putLike(id)
+      this._api.putUnlike(id)
         .then((res) => {
           this._cardLikeNumber.textContent = res.likes.length
           this._likes = res.likes
@@ -35,7 +36,7 @@ export default class Card {
         })
     }
     else {
-      this._apiLike.putLike(id)
+      this._api.putLike(id)
         .then(res => {
           this._cardLikeNumber.textContent = res.likes.length
           this._likes = res.likes

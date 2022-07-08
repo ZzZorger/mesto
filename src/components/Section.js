@@ -1,6 +1,5 @@
 export default class Section {
   constructor(options) {
-    // console.log(options)
     this._initialArray = options.items;
     this._renderer = options.renderer;
     this._container = document.querySelector(options.containerSelector);

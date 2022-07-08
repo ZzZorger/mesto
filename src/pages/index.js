@@ -18,7 +18,7 @@ import {
   profilePopupClass,
   cardPopupClass,
   confirmPopupClass,
-  baseUrl,
+  // baseUrl,
   avatarEditionButton,
   avatarPopupClass,
   profileImg,
@@ -27,63 +27,48 @@ import {
   from "../utils/constants.js";
 import PopupWithConfirmation from '../components/PopupWithConfirmation.js';
 
-// API запросы
-const apiUserData = new Api({
-  baseUrl: `${baseUrl}/users/me`
+// API запрос
+const api = new Api({
+  baseUrl: 'https://nomoreparties.co/v1/cohort-44',
+  headers: {
+    authorization: '17e41917-a2e7-4ed8-bcef-86b0aad6a6d8',
+    'Content-Type': 'application/json'
+  }
 });
-const apiCardsData = new Api({
-  baseUrl: `${baseUrl}/cards`
-});
-const apiPatchUserData = new Api({
-  method: 'PATCH',
-  baseUrl: `${baseUrl}/users/me`
-})
-const apiPostCard = new Api({
-  method: 'POST',
-  baseUrl: `${baseUrl}/cards`
-})
-const apiDelete = new Api({
-  method: 'DELETE',
-  baseUrl: `${baseUrl}/cards`
-})
-const apiLikeCard = new Api({
-  method: 'PUT',
-  baseUrl: `${baseUrl}/cards`
-})
-const apiPatchUserAvatar = new Api({
-  method: 'PATCH',
-  baseUrl: `${baseUrl}/users/me/avatar`
-})
 
 // Функция сабмита формы профиля
 function profileSubmitHandler(input) {
   profileForm.renderSaving(true);
-  apiPatchUserData.patchProfileData(input)
+  api.patchProfileData(input)
     .then(items => {
       userInfo.setUserData(items);
+    })
+    .then(() => {
+      profileForm.closePopup();
     })
     .catch((err) => {
       console.log(`Ошибка: ${err}`)
     })
     .finally(() => {
       profileForm.renderSaving(false);
-      profileForm.closePopup();
     })
 }
 
 // Функция сабмита формы аватара
 function avatarSubmitHandler(input) {
   avatarForm.renderSaving(true);
-  apiPatchUserAvatar.patchProfileData(input)
+  api.patchProfileAvatar(input)
     .then(items => {
       profileImg.src = items.avatar;
+    })
+    .then(() => {
+      avatarForm.closePopup();
     })
     .catch((err) => {
       console.log(`Ошибка: ${err}`)
     })
     .finally(() => {
-      avatarForm.renderSaving(false);
-      avatarForm.closePopup();
+      avatarForm.renderSaving(false); 
     })
 }
 
@@ -96,7 +81,7 @@ const cardValidation = new FormValidator(popupData, cardPopupForm);
 const avatarValidation = new FormValidator(popupData, avatarPopupForm);
 const confirmPopup = new PopupWithConfirmation({
   popupSelector: confirmPopupClass,
-  api: apiDelete
+  api: api
 });
 const profileForm = new PopupWithForm({
   popupSelector: profilePopupClass,
@@ -108,14 +93,14 @@ const avatarForm = new PopupWithForm({
 })
 
 // Установка данных профиля
-apiUserData.getServerData()
+api.getServerData()
   .then(items => {
     userInfo.setUserData(items);
     profileImg.src = items.avatar
   })
 
 // Создание карточек
-Promise.all([apiCardsData.getServerData(), apiUserData.getServerData()])
+Promise.all([api.getCardsData(), api.getServerData()])
   .then((item) => {
     const userID = item[1]._id;
     const cardArray = item[0];
@@ -148,8 +133,7 @@ Promise.all([apiCardsData.getServerData(), apiUserData.getServerData()])
         handleCardClick: handleCardClick,
         confirmDeletePopup: confirmDeletePopup,
         containerSelector: classNameElements,
-        apiLike: apiLikeCard,
-        apiUnlike: apiDelete
+        api: api
       }).generateCard();
       defaultCardList.addItem(card);
     }
@@ -162,16 +146,18 @@ Promise.all([apiCardsData.getServerData(), apiUserData.getServerData()])
     // Функция сабмита формы карточки
     function cardSubmitHandler(input) {
       cardForm.renderSaving(true);
-      apiPostCard.postCard(input)
+      api.postCard(input)
         .then(item => {
           createCard(item)
+        })
+        .then(() => {
+          cardForm.closePopup();
         })
         .catch((err) => {
           console.log(`Ошибка: ${err}`)
         })
         .finally(() => {
           cardForm.renderSaving(false);
-          cardForm.closePopup();
         })
     }
 
