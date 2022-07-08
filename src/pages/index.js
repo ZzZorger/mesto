@@ -88,6 +88,7 @@ function avatarSubmitHandler(input) {
       avatarForm.closePopup();
     })
 }
+
 // Объявление классов
 //
 const userInfo = new UserInfo({ name: '.profile__name', info: '.profile__job' });
