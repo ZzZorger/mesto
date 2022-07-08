@@ -30,7 +30,8 @@ export default class Api {
       },
       body: JSON.stringify({
         name: input.name,
-        about: input.about
+        about: input.about,
+        avatar: input.url
       })
     })
     .then((res) => {
@@ -88,6 +89,27 @@ export default class Api {
       headers: {
         authorization: this._authorization
       }
+    })
+    .then((res) => {
+      if (res.ok) {
+        return res.json()
+      }
+      return Promise.reject(`Ошибка: ${res.status}`)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
+  patchProfileAvatar(input) {
+    return fetch(this._server, {
+      method: this._method,
+      headers: {
+        authorization: this._authorization,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        avatar: input
+      })
     })
     .then((res) => {
       if (res.ok) {
