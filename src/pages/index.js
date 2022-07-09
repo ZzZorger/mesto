@@ -209,7 +209,6 @@ profileForm.setEventListeners();
 avatarForm.setEventListeners();
 cardForm.setEventListeners();
 popupWithImage.setEventListeners();
-
 popupProfileEditButton.addEventListener('click', openProfilePopupHandler);
 avatarEditionButton.addEventListener('click', openAvatarPopupHandler);
 popupAddCardButton.addEventListener('click', openCardPopupHandler);
