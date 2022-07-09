@@ -158,7 +158,7 @@ function cardSubmitHandler(input) {
   cardForm.renderSaving(true);
   api.postCard(input)
     .then(item => {
-      createCard(item)
+      createCard(item, item.owner._id)
     })
     .then(() => {
       cardForm.closePopup();
