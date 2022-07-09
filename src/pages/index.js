@@ -42,7 +42,7 @@ const cardValidation = new FormValidator(popupData, cardPopupForm);
 const avatarValidation = new FormValidator(popupData, avatarPopupForm);
 const confirmPopup = new PopupWithConfirmation({
   popupSelector: confirmPopupClass,
-  api: api
+  submitConfirmPopup: submitConfirmPopup
 });
 const profileForm = new PopupWithForm({
   popupSelector: profilePopupClass,
@@ -72,6 +72,11 @@ function openProfilePopupHandler() {
 function openCardPopupHandler() {
   cardValidation.deactivButton();
   cardForm.openPopup();
+}
+// Открыть попап редактирования аватара
+function openAvatarPopupHandler() {
+  avatarValidation.deactivButton();
+  avatarForm.openPopup();
 }
 // Открыть попап карточки
 function handleCardClick(name, link) {
@@ -104,6 +109,15 @@ function handleLikeClick({ options, cardLikeNumber, likesArray, cardLikeBtn }) {
 function confirmDeletePopup(id) {
   confirmPopup.openPopup();
   confirmPopup.setEventListeners(id);
+}
+
+function submitConfirmPopup(id) {
+  const card = document.getElementById(id)
+  api.deleteCard(id)
+  .then(res => {
+    card.parentElement.remove();
+    confirmPopup.closePopup();
+  })
 }
 // Сабмит формы профиля
 function profileSubmitHandler(input) {
@@ -195,6 +209,7 @@ profileForm.setEventListeners();
 avatarForm.setEventListeners();
 cardForm.setEventListeners();
 popupWithImage.setEventListeners();
+
 popupProfileEditButton.addEventListener('click', openProfilePopupHandler);
-avatarEditionButton.addEventListener('click', () => avatarForm.openPopup());
+avatarEditionButton.addEventListener('click', openAvatarPopupHandler);
 popupAddCardButton.addEventListener('click', openCardPopupHandler);
