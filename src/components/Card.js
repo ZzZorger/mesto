@@ -11,6 +11,7 @@ export default class Card {
     this._userID = options.item.userID;
     this._handleLikeClick = options.handleLikeClick;
     this._options = options;
+    this._submitConfirmPopup = submitConfirmPopup;
   }
 
   _getTemplate() {
@@ -22,7 +23,7 @@ export default class Card {
   }
 
   _setEventListeners(cardLikeNumber, likes, cardLike) {
-    this._cardDelete.addEventListener('click', () => this._confirmDeletePopup(this._id));
+    this._cardDelete.addEventListener('click', () => this._confirmDeletePopup(this._submitConfirmPopup(this._id)));
     this._cardLike.addEventListener('click', () => this._handleLikeClick({
       options: this._options, 
       cardLikeNumber: cardLikeNumber, 

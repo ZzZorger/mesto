@@ -40,10 +40,7 @@ const popupWithImage = new PopupWithImage('.img-popup');
 const profileValidation = new FormValidator(popupData, profilePopupForm);
 const cardValidation = new FormValidator(popupData, cardPopupForm);
 const avatarValidation = new FormValidator(popupData, avatarPopupForm);
-const confirmPopup = new PopupWithConfirmation({
-  popupSelector: confirmPopupClass,
-  submitConfirmPopup: submitConfirmPopup
-});
+const confirmPopup = new PopupWithConfirmation(confirmPopupClass, submitConfirmPopup);
 const profileForm = new PopupWithForm({
   popupSelector: profilePopupClass,
   submitFormHandler: (input) => profileSubmitHandler(input)
@@ -106,18 +103,24 @@ function handleLikeClick({ options, cardLikeNumber, likesArray, cardLikeBtn }) {
 }
 
 // Открыть попап удаления карточки
-function confirmDeletePopup(id) {
+function confirmDeletePopup(submitConfirmPopup) {
   confirmPopup.openPopup();
-  confirmPopup.setEventListeners(id);
+  submitConfirmPopup
+  // console.log('opened', id)
 }
-
+confirmPopup.setEventListeners();
 function submitConfirmPopup(id) {
-  const card = document.getElementById(id)
-  api.deleteCard(id)
-  .then(res => {
-    card.parentElement.remove();
-    confirmPopup.closePopup();
-  })
+
+  console.log('deleted', id)
+  // button.removeEventListener('click', () => {  
+  //   submitConfirmPopup(id, button)
+  // });
+  // const card = document.getElementById(id)
+  // api.deleteCard(id)
+  // .then(res => {
+  //   card.parentElement.remove();
+  //   confirmPopup.closePopup();
+  // })
 }
 // Сабмит формы профиля
 function profileSubmitHandler(input) {
@@ -184,6 +187,7 @@ function createCard(item, userID) {
     template: templateId,
     handleCardClick: handleCardClick,
     confirmDeletePopup: confirmDeletePopup,
+    submitConfirmPopup: submitConfirmPopup,
     containerSelector: classNameElements,
     handleLikeClick: handleLikeClick
   }).generateCard();
