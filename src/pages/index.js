@@ -103,7 +103,6 @@ function handleLikeClick(card) {
       })
   }
 }
-
 // Открыть попап удаления карточки
 function confirmDeletePopup(card) {
   confirmPopup.openPopup();
@@ -196,8 +195,7 @@ Promise.all([api.getCardsData(), api.getServerData()])
   .catch((err) => {
     console.log(err)
   })
-
-
+//
 // Включение валидации
 profileValidation.enableValidation();
 cardValidation.enableValidation();
