@@ -84,11 +84,8 @@ function handleCardClick(name, link) {
 }
 // Лайкнуть карточку
 function handleLikeClick(card) {
-  const myLike = card._likes.some(function(like) {
-    return like._id == card._userID
-  })
-  if (myLike) {
-    api.putDislike(card._id)
+  if (card.isLiked()) {
+    api.putDislike(card.getId())
         .then((res) => {
           card.dislikeCard(res);
         })
@@ -97,7 +94,7 @@ function handleLikeClick(card) {
         })
   }
   else {
-    api.putLike(card._id)
+    api.putLike(card.getId())
       .then(res => {
         card.likeCard(res);
       }) 
@@ -113,7 +110,7 @@ function confirmDeletePopup(card) {
   confirmPopup.initializeCard(card);
 }
 function submitConfirmPopup(card) {
-  api.deleteCard(card._id)
+  api.deleteCard(card.getId())
   .then(() => {
     card.deleteCard()
     confirmPopup.closePopup();
