@@ -88,7 +88,7 @@ function handleLikeClick(card) {
     return like._id == card._userID
   })
   if (myLike) {
-    api.putUnlike(card._id)
+    api.putDislike(card._id)
         .then((res) => {
           card.dislikeCard(res);
         })

@@ -60,7 +60,7 @@ export default class Api {
     })
       .then((res) => this._getResponseData(res))
   }
-  putUnlike(id) {
+  putDislike(id) {
     return fetch(`${this._server}/cards/${id}/likes`, {
       method: 'DELETE',
       headers: this._headers
