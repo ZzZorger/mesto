@@ -110,9 +110,8 @@ function handleLikeClick(card) {
 // Открыть попап удаления карточки
 function confirmDeletePopup(card) {
   confirmPopup.openPopup();
-  confirmPopup.setEventListeners(card);
+  confirmPopup.initializeCard(card);
 }
-
 function submitConfirmPopup(card) {
   api.deleteCard(card._id)
   .then(() => {
@@ -211,6 +210,7 @@ profileForm.setEventListeners();
 avatarForm.setEventListeners();
 cardForm.setEventListeners();
 popupWithImage.setEventListeners();
+confirmPopup.setEventListeners();
 popupProfileEditButton.addEventListener('click', openProfilePopupHandler);
 avatarEditionButton.addEventListener('click', openAvatarPopupHandler);
 popupAddCardButton.addEventListener('click', openCardPopupHandler);
