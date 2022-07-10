@@ -83,24 +83,20 @@ function handleCardClick(name, link) {
   popupWithImage.openPopup(name, link)
 }
 // Лайкнуть карточку
-function handleLikeClick({ options, cardLikeNumber, likesArray, cardLikeBtn }) {
-  const myLike = options.item.likes.some(function(like) {
-    return like._id == options.item.userID
+function handleLikeClick(card) {
+  const myLike = card._likes.some(function(like) {
+    return like._id == card._userID
   })
   if (myLike) {
-    api.putUnlike(options.item._id)
+    api.putUnlike(card._id)
         .then((res) => {
-          cardLikeNumber.textContent = res.likes.length
-          likesArray = res.likes
-          cardLikeBtn.classList.remove('card__like-button_active');
+          card.dislikeCard(res);
         })
   }
   else {
-    api.putLike(options.item._id)
+    api.putLike(card._id)
       .then(res => {
-        cardLikeNumber.textContent = res.likes.length
-        likesArray = res.likes
-        cardLikeBtn.classList.add('card__like-button_active');
+        card.likeCard(res);
       }) 
   }
 }

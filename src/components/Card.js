@@ -11,6 +11,7 @@ export default class Card {
     this._userID = options.item.userID;
     this._handleLikeClick = options.handleLikeClick;
     this._options = options;
+    // console.log(this)
   }
 
   _getTemplate() {
@@ -21,17 +22,21 @@ export default class Card {
       .cloneNode(true);
   }
 
-  _setEventListeners(cardLikeNumber, likes, cardLike) {
+  _setEventListeners() {
     this._cardDelete.addEventListener('click', () => this._confirmDeletePopup(this._id));
-    this._cardLike.addEventListener('click', () => this._handleLikeClick({
-      options: this._options, 
-      cardLikeNumber: cardLikeNumber, 
-      likesArray: likes, 
-      cardLikeBtn: cardLike
-    }));
+    this._cardLike.addEventListener('click', () => this._handleLikeClick(this));
     this._cardImg.addEventListener('click', () => this._handleCardClick(this._name, this._link))
   }
-
+  likeCard(res) {
+    this._cardLikeNumber.textContent = res.likes.length;
+    this._likes = res.likes;
+    this._cardLike.classList.add('card__like-button_active');
+  }
+  dislikeCard(res){
+    this._cardLikeNumber.textContent = res.likes.length;
+    this._likes = res.likes;
+    this._cardLike.classList.remove('card__like-button_active');
+  }
   generateCard() {
     this._element = this._getTemplate();
     this._cardImg = this._element.querySelector('.card__img');
@@ -52,7 +57,7 @@ export default class Card {
     this._cardImg.alt = this._name;
     this._cardName.textContent = this._name;
     this._cardLikeNumber.textContent = this._likes.length;
-    this._setEventListeners(this._cardLikeNumber, this._likes, this._cardLike);
+    this._setEventListeners();
     
     return this._element;
   }
