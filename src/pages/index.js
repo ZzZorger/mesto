@@ -92,27 +92,35 @@ function handleLikeClick(card) {
         .then((res) => {
           card.dislikeCard(res);
         })
+        .catch((err) => {
+          console.log(`Ошибка: ${err}`)
+        })
   }
   else {
     api.putLike(card._id)
       .then(res => {
         card.likeCard(res);
       }) 
+      .catch((err) => {
+        console.log(`Ошибка: ${err}`)
+      })
   }
 }
 
 // Открыть попап удаления карточки
-function confirmDeletePopup(id) {
+function confirmDeletePopup(card) {
   confirmPopup.openPopup();
-  confirmPopup.setEventListeners(id);
+  confirmPopup.setEventListeners(card);
 }
 
-function submitConfirmPopup(id) {
-  const card = document.getElementById(id)
-  api.deleteCard(id)
-  .then(res => {
-    card.parentElement.remove();
+function submitConfirmPopup(card) {
+  api.deleteCard(card._id)
+  .then(() => {
+    card.deleteCard()
     confirmPopup.closePopup();
+  })
+  .catch((err) => {
+    console.log(`Ошибка: ${err}`)
   })
 }
 // Сабмит формы профиля
@@ -121,8 +129,6 @@ function profileSubmitHandler(input) {
   api.patchProfileData(input)
     .then(items => {
       userInfo.setUserData(items);
-    })
-    .then(() => {
       profileForm.closePopup();
     })
     .catch((err) => {
@@ -187,9 +193,9 @@ function createCard(item, userID) {
 }
 // Добавление карточек в разметку
 Promise.all([api.getCardsData(), api.getServerData()])
-  .then((item) => {
-    userInfo.setUserData(item[1]);
-    cardList.renderItems(item[0], item[1]._id);
+  .then(([initialCards, info]) => {
+    userInfo.setUserData(info);
+    cardList.renderItems(initialCards, info._id);
   })
   .catch((err) => {
     console.log(err)

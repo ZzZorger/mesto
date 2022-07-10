@@ -11,7 +11,6 @@ export default class Card {
     this._userID = options.item.userID;
     this._handleLikeClick = options.handleLikeClick;
     this._options = options;
-    // console.log(this)
   }
 
   _getTemplate() {
@@ -23,7 +22,7 @@ export default class Card {
   }
 
   _setEventListeners() {
-    this._cardDelete.addEventListener('click', () => this._confirmDeletePopup(this._id));
+    this._cardDelete.addEventListener('click', () => this._confirmDeletePopup(this));
     this._cardLike.addEventListener('click', () => this._handleLikeClick(this));
     this._cardImg.addEventListener('click', () => this._handleCardClick(this._name, this._link))
   }
@@ -36,6 +35,9 @@ export default class Card {
     this._cardLikeNumber.textContent = res.likes.length;
     this._likes = res.likes;
     this._cardLike.classList.remove('card__like-button_active');
+  }
+  deleteCard() {
+    this._element.remove();
   }
   generateCard() {
     this._element = this._getTemplate();
@@ -58,7 +60,6 @@ export default class Card {
     this._cardName.textContent = this._name;
     this._cardLikeNumber.textContent = this._likes.length;
     this._setEventListeners();
-    
     return this._element;
   }
 }
