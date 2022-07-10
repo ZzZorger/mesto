@@ -11,7 +11,6 @@ export default class Card {
     this._userID = options.item.userID;
     this._handleLikeClick = options.handleLikeClick;
     this._options = options;
-    // console.log(this._userID)
   }
 
   _getTemplate() {
