@@ -5,5 +5,6 @@
 
 Проект собран с помощью Webpack.
 Используемый стек технологий: HTML, CSS, JavaScript.
+Статус проекта - выполнен.
 
 https://zzzorger.github.io/mesto/
