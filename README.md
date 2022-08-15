@@ -17,6 +17,6 @@
 
 Для запуска проекта нужно установить библиотеку пакетов npm.
 
-[Ссылка на проект](https://zzzorger.github.io/mesto/) 
+### [Ссылка на проект](https://zzzorger.github.io/mesto/) 
 
 
